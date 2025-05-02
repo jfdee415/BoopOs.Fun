@@ -3,35 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <title>BrainrotOS • Pump & Rug Edition</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
   <style>
     /* RESET */
     * { box-sizing:border-box; margin:0; padding:0; }
     html, body {
       width:100%; height:100%; overflow:hidden;
-      background: #0a0a12 url('https://source.unsplash.com/1600x900/?cyberpunk,grid') no-repeat center center fixed;
-      background-size:cover;
-      font-family:'Press Start 2P', monospace;
-      color:#0ff; cursor:crosshair;
+      background:#0a0a12 url('https://source.unsplash.com/1600x900/?cyberpunk,grid') no-repeat center/cover;
+      font-family:'Press Start 2P',monospace; color:#0ff; cursor:crosshair;
     }
-
-    /* DESKTOP ICONS */
+    /* ICONS */
     .desktop { position:relative; width:100%; height:100%; }
     .icon {
       width:72px; text-align:center; float:left; margin:20px; user-select:none;
-      transition: transform .1s;
+      transition:transform .1s;
     }
     .icon img {
-      width:48px; height:48px;
-      filter:drop-shadow(0 0 8px #0ff);
+      width:48px; height:48px; filter:drop-shadow(0 0 8px #0ff);
     }
     .icon:hover { transform:translateY(-4px); }
-    .icon label {
-      display:block; margin-top:6px; font-size:10px; line-height:1.2;
-    }
+    .icon label { display:block; margin-top:6px; font-size:10px; }
 
     /* DOCK */
     .dock {
@@ -39,7 +30,6 @@
       background:rgba(0,0,0,0.6); padding:6px 12px; border-radius:16px;
       display:flex; gap:12px;
     }
-    .dock .icon { margin:0; }
     .dock .icon img { width:32px; height:32px; }
 
     /* TASKBAR */
@@ -54,20 +44,19 @@
     .window {
       position:absolute; display:none; flex-direction:column;
       width:400px; height:260px;
-      background:rgba(0,0,16,0.9);
-      border:2px solid #0ff; box-shadow:0 0 12px #0ff;
-      overflow:hidden;
+      background:rgba(0,0,16,0.9); border:2px solid #0ff;
+      box-shadow:0 0 12px #0ff; overflow:hidden;
     }
-    .window .titlebar {
+    .titlebar {
       background:#0ff; color:#111; padding:6px 10px;
       display:flex; justify-content:space-between; align-items:center;
-      cursor:move; user-select:none; font-size:10px;
+      cursor:move; font-size:10px;
     }
-    .window .titlebar .close {
+    .titlebar .close {
       background:none; border:none; color:#111; font-size:12px;
       cursor:pointer;
     }
-    .window .content {
+    .content {
       flex:1; padding:8px; overflow:auto; font-size:10px; line-height:1.3;
     }
     .terminal {
@@ -77,98 +66,103 @@
   </style>
 </head>
 <body>
+
   <div class="desktop">
-    <!-- Icons -->
+
+    <!-- DESKTOP ICONS -->
     <div class="icon" data-win="win-pump">
-      <img src="https://img.icons8.com/fluency/48/000000/rocket.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Pump.fun"/>
       <label>PUMP.FUN</label>
     </div>
     <div class="icon" data-win="win-rug">
-      <img src="https://img.icons8.com/fluency/48/000000/warning-shield.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/633/633759.png" alt="Rug Pull"/>
       <label>RUG PULL</label>
     </div>
     <div class="icon" data-win="win-meme">
-      <img src="https://img.icons8.com/fluency/48/000000/face-with-tears-of-joy.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/4962/4962871.png" alt="Memes"/>
       <label>MEMES</label>
     </div>
     <div class="icon" data-win="win-tweets">
-      <img src="https://img.icons8.com/fluency/48/000000/twitter.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/145/145812.png" alt="Crypto Twts"/>
       <label>CRYPTO TWTS</label>
     </div>
     <div class="icon" data-win="win-nft">
-      <img src="https://img.icons8.com/fluency/48/000000/non-fungible-token.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/1260/1260995.png" alt="NFT Drops"/>
       <label>NFT DROPS</label>
     </div>
     <div class="icon" data-win="win-zoom">
-      <img src="https://img.icons8.com/fluency/48/000000/ghost.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/4140/4140046.png" alt="Zoomer Chat"/>
       <label>ZOOMER CHAT</label>
     </div>
     <div class="icon" data-win="win-gas">
-      <img src="https://img.icons8.com/fluency/48/000000/gas-station.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/809/809257.png" alt="Gas Tracker"/>
       <label>GAS TRACKER</label>
     </div>
     <div class="icon" data-win="win-whale">
-      <img src="https://img.icons8.com/fluency/48/000000/whale-tail.png"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png" alt="Whale Watch"/>
       <label>WHALE WATCH</label>
     </div>
+    <div class="icon" data-win="win-dex">
+      <img src="https://cdn-icons-png.flaticon.com/512/185/185661.png" alt="Dex Screener"/>
+      <label>DEX SCREENER</label>
+    </div>
+    <div class="icon" data-win="win-fud">
+      <img src="https://cdn-icons-png.flaticon.com/512/5269/5269603.png" alt="FUD Meter"/>
+      <label>FUD METER</label>
+    </div>
 
-    <!-- Dock -->
+    <!-- DOCK -->
     <div class="dock">
-      <div class="icon" data-win="win-pump"><img src="https://img.icons8.com/fluency/48/000000/rocket.png"/></div>
-      <div class="icon" data-win="win-meme"><img src="https://img.icons8.com/fluency/48/000000/face-with-tears-of-joy.png"/></div>
-      <div class="icon" data-win="win-rug"><img src="https://img.icons8.com/fluency/48/000000/warning-shield.png"/></div>
-      <div class="icon" data-win="win-whale"><img src="https://img.icons8.com/fluency/48/000000/whale-tail.png"/></div>
+      <div class="icon" data-win="win-pump"><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png"/></div>
+      <div class="icon" data-win="win-meme"><img src="https://cdn-icons-png.flaticon.com/512/4962/4962871.png"/></div>
+      <div class="icon" data-win="win-rug"><img src="https://cdn-icons-png.flaticon.com/512/633/633759.png"/></div>
+      <div class="icon" data-win="win-whale"><img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png"/></div>
+      <div class="icon" data-win="win-dex"><img src="https://cdn-icons-png.flaticon.com/512/185/185661.png"/></div>
     </div>
   </div>
 
-  <!-- Taskbar -->
+  <!-- TASKBAR -->
   <div class="taskbar">
     BrainrotOS Pump & Rug
     <div class="clock">00:00</div>
   </div>
 
+  <!-- WINDOWS -->
+
   <!-- PUMP.FUN -->
   <div id="win-pump" class="window" style="top:20px; left:20px;">
-    <div class="titlebar">
-      PUMP.FUN <button class="close">✕</button>
-    </div>
+    <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
     <div class="content">
       <iframe src="https://pump.fun" style="width:100%; height:100%; border:none;"></iframe>
     </div>
   </div>
 
-  <!-- RUG PULL DETECTOR -->
+  <!-- RUG PULL -->
   <div id="win-rug" class="window" style="top:40px; left:450px;">
-    <div class="titlebar">
-      RUG PULL DETECTOR <button class="close">✕</button>
-    </div>
+    <div class="titlebar">RUG PULL DETECTOR <button class="close">✕</button></div>
     <div class="content terminal" id="rug-output">
       <p>> scanning liquidity…</p>
       <p>> scanning dev wallet…</p>
       <p>> RESULT: <strong>SAFE ✅</strong></p>
-      <p>> recent rug pull: <em>$SHIBYAKI</em></p>
+      <p>> last rug pull: <em>$SHIBYAKI</em></p>
       <p><em>click icon to re-scan</em></p>
     </div>
   </div>
 
   <!-- MEMES -->
-  <div id="win-meme" class="window" style="top:300px; left:40px;">
-    <div class="titlebar">
-      BRAINROT MEMES <button class="close">✕</button>
-    </div>
+  <div id="win-meme" class="window" style="top:300px; left:20px;">
+    <div class="titlebar">BRAINROT MEMES <button class="close">✕</button></div>
     <div class="content" style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-      <img src="https://source.unsplash.com/random/200x200/?meme,fun" />
-      <img src="https://source.unsplash.com/random/200x200/?crypto,meme" />
-      <img src="https://source.unsplash.com/random/200x200/?cartoon" />
-      <img src="https://source.unsplash.com/random/200x200/?zoom" />
+      <img src="https://source.unsplash.com/200x200/?meme" alt="meme1"/>
+      <img src="https://source.unsplash.com/200x200/?crypto,meme" alt="meme2"/>
+      <img src="https://source.unsplash.com/200x200/?funny" alt="meme3"/>
+      <img src="https://source.unsplash.com/200x200/?zoom" alt="meme4"/>
     </div>
   </div>
 
-  <!-- CRYPTO TWEETS -->
+  <!-- CRYPTO TWTS -->
   <div id="win-tweets" class="window" style="top:300px; left:460px;">
-    <div class="titlebar">
-      LIVE CRYPTO TWEETS <button class="close">✕</button>
-    </div>
+    <div class="titlebar">LIVE CRYPTO TWEETS <button class="close">✕</button></div>
     <div class="content">
       <p>“$PEPE just pumped 300% 🤯” – @MoonChad</p>
       <p>“Rug pull incoming? 🤔 #FUD” – @HODLer99</p>
@@ -178,10 +172,8 @@
   </div>
 
   <!-- NFT DROPS -->
-  <div id="win-nft" class="window" style="top:600px; left:250px;">
-    <div class="titlebar">
-      UPCOMING NFT DROPS <button class="close">✕</button>
-    </div>
+  <div id="win-nft" class="window" style="top:600px; left:20px;">
+    <div class="titlebar">UPCOMING NFT DROPS <button class="close">✕</button></div>
     <div class="content">
       <ul>
         <li>⚡ PunkWolves — 5/20 @ 4PM UTC</li>
@@ -193,10 +185,8 @@
   </div>
 
   <!-- ZOOMER CHAT -->
-  <div id="win-zoom" class="window" style="top:620px; left:700px;">
-    <div class="titlebar">
-      ZOOMER CHAT <button class="close">✕</button>
-    </div>
+  <div id="win-zoom" class="window" style="top:600px; left:460px;">
+    <div class="titlebar">ZOOMER CHAT <button class="close">✕</button></div>
     <div class="content">
       <p><strong>You:</strong> YOLO on $PUMP?</p>
       <p><strong>Peer:</strong> fr fr 🚀🚀</p>
@@ -206,97 +196,122 @@
   </div>
 
   <!-- GAS TRACKER -->
-  <div id="win-gas" class="window" style="top:960px; left:40px;">
-    <div class="titlebar">
-      ETH GAS TRACKER <button class="close">✕</button>
-    </div>
+  <div id="win-gas" class="window" style="top:960px; left:20px;">
+    <div class="titlebar">ETH GAS TRACKER <button class="close">✕</button></div>
     <div class="content terminal" id="gas-output">
       <p>> fast: <strong>120 GWEI</strong></p>
       <p>> standard: <strong>85 GWEI</strong></p>
       <p>> slow: <strong>40 GWEI</strong></p>
       <p>> avg tx time: <strong>30s</strong></p>
+      <p><em>click icon to randomize</em></p>
     </div>
   </div>
 
   <!-- WHALE WATCH -->
   <div id="win-whale" class="window" style="top:960px; left:460px;">
-    <div class="titlebar">
-      WHALE WATCHER <button class="close">✕</button>
-    </div>
+    <div class="titlebar">WHALE WATCHER <button class="close">✕</button></div>
     <div class="content">
-      <p>🚨  WALLET 0xAB…F320 moved:</p>
+      <p>🚨 WALLET 0xAB…F320 moved:</p>
       <ul>
         <li>10,000 $DOGE → $DOGEPOOL</li>
         <li>25 Ξ → Uniswap</li>
-        <li>5,000,000 $SHIB → Pancake</li>
+        <li>5 000 000 $SHIB → Pancake</li>
       </ul>
       <p><em>Last update: just now</em></p>
+    </div>
+  </div>
+
+  <!-- DEX SCREENER -->
+  <div id="win-dex" class="window" style="top:1300px; left:20px;">
+    <div class="titlebar">DEX SCREENER <button class="close">✕</button></div>
+    <div class="content">
+      <iframe src="https://dexscreener.com" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
+  </div>
+
+  <!-- FUD METER -->
+  <div id="win-fud" class="window" style="top:1300px; left:460px;">
+    <div class="titlebar">FUD METER <button class="close">✕</button></div>
+    <div class="content terminal" id="fud-output">
+      <p>> FUD LEVEL: 42%</p>
+      <p>> HYPE SCORE: 88/100</p>
+      <p><em>click icon to refresh</em></p>
     </div>
   </div>
 
   <script>
     // clock
     setInterval(() => {
-      const d = new Date();
-      document.querySelector('.clock').textContent =
-        String(d.getHours()).padStart(2,'0') + ':' +
-        String(d.getMinutes()).padStart(2,'0');
-    }, 1000);
+      const d=new Date(),
+            h=String(d.getHours()).padStart(2,'0'),
+            m=String(d.getMinutes()).padStart(2,'0');
+      document.querySelector('.clock').textContent=`${h}:${m}`;
+    },1000);
 
     // toggle windows
-    document.querySelectorAll('.icon').forEach(ic => {
-      ic.onclick = () => {
-        const w = document.getElementById(ic.dataset.win);
-        const vis = getComputedStyle(w).display === 'flex';
-        w.style.display = vis ? 'none' : 'flex';
+    document.querySelectorAll('.icon').forEach(ic=>{
+      ic.onclick = ()=>{
+        const w=document.getElementById(ic.dataset.win),
+              vis = getComputedStyle(w).display==='flex';
+        w.style.display = vis? 'none':'flex';
       };
     });
 
     // close buttons
-    document.querySelectorAll('.close').forEach(btn =>
-      btn.onclick = () => btn.closest('.window').style.display = 'none'
+    document.querySelectorAll('.close').forEach(btn=>
+      btn.onclick=()=>btn.closest('.window').style.display='none'
     );
 
     // draggable
-    document.querySelectorAll('.window').forEach(w => {
-      const bar = w.querySelector('.titlebar');
-      bar.onmousedown = e => {
-        const r = w.getBoundingClientRect();
-        const offX = e.clientX - r.left, offY = e.clientY - r.top;
-        function mv(e) {
-          w.style.left = e.clientX - offX + 'px';
-          w.style.top  = e.clientY - offY + 'px';
+    document.querySelectorAll('.window').forEach(win=>{
+      const bar=win.querySelector('.titlebar');
+      bar.onmousedown=e=>{
+        const r=win.getBoundingClientRect(),
+              offX=e.clientX-r.left, offY=e.clientY-r.top;
+        function mv(e){
+          win.style.left=e.clientX-offX+'px';
+          win.style.top =e.clientY-offY+'px';
         }
-        document.addEventListener('mousemove', mv);
-        document.addEventListener('mouseup', () =>
-          document.removeEventListener('mousemove', mv), { once:true }
-        );
+        document.addEventListener('mousemove',mv);
+        document.addEventListener('mouseup',()=>document.removeEventListener('mousemove',mv),{once:true});
       };
-      bar.ondragstart = () => false;
+      bar.ondragstart=()=>false;
     });
 
-    // rug detector re-scan
-    const rugOut = document.getElementById('rug-output');
-    document.querySelector('[data-win="win-rug"]').onclick = () => {
-      setTimeout(() => {
-        const safe = Math.random() > 0.4;
-        rugOut.innerHTML = `
+    // RUG PULL re-scan
+    const rugOut=document.getElementById('rug-output');
+    document.querySelector('[data-win="win-rug"]').onclick=()=>{
+      setTimeout(()=>{
+        const ok=Math.random()>0.4;
+        rugOut.innerHTML=`
           <p>> scanning liquidity…</p>
           <p>> scanning dev wallet…</p>
-          <p>> RESULT: <strong>${safe?'SAFE ✅':'RUG 🚨'}</strong></p>
-          <p>> last rug: <em>$MELTDOWN</em></p>
+          <p>> RESULT: <strong>${ok?'SAFE ✅':'RUG 🚨'}</strong></p>
+          <p>> last rug pull: <em>$MELTDOWN</em></p>
           <p><em>click to re-scan</em></p>`;
-      }, 400);
+      },400);
     };
 
-    // gas tracker randomize
-    const gasOut = document.getElementById('gas-output');
-    document.querySelector('[data-win="win-gas"]').onclick = () => {
-      gasOut.innerHTML = `
-        <p>> fast: <strong>${Math.floor(60+Math.random()*100)} GWEI</strong></p>
-        <p>> std: <strong>${Math.floor(40+Math.random()*60)} GWEI</strong></p>
-        <p>> slow: <strong>${Math.floor(10+Math.random()*40)} GWEI</strong></p>
-        <p>> tx time: <strong>${Math.floor(10+Math.random()*50)}s</strong></p>`;
+    // GAS randomize
+    const gasOut=document.getElementById('gas-output');
+    document.querySelector('[data-win="win-gas"]').onclick=()=>{
+      gasOut.innerHTML=`
+        <p>> fast: <strong>${60+Math.floor(Math.random()*100)} GWEI</strong></p>
+        <p>> standard: <strong>${40+Math.floor(Math.random()*60)} GWEI</strong></p>
+        <p>> slow: <strong>${10+Math.floor(Math.random()*40)} GWEI</strong></p>
+        <p>> avg tx time: <strong>${10+Math.floor(Math.random()*50)}s</strong></p>
+        <p><em>click icon to randomize</em></p>`;
+    };
+
+    // FUD meter
+    const fudOut=document.getElementById('fud-output');
+    document.querySelector('[data-win="win-fud"]').onclick=()=>{
+      const fud=Math.floor(Math.random()*100),
+            hype=Math.floor(Math.random()*100);
+      fudOut.innerHTML=`
+        <p>> FUD LEVEL: ${fud}%</p>
+        <p>> HYPE SCORE: ${hype}/100</p>
+        <p><em>click to refresh</em></p>`;
     };
   </script>
 </body>
