@@ -5,15 +5,12 @@
   <title>BrainrotOS • Pump & Rug Deluxe</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
   <style>
-    /* RESET & BASE */
     * { box-sizing:border-box; margin:0; padding:0 }
     html, body {
       width:100%; height:100%; overflow:hidden;
       background:#0a0a12 url('https://source.unsplash.com/1600x900/?cyberpunk,grid') center/cover no-repeat;
       font-family:'Press Start 2P',monospace; color:#0ff; cursor:crosshair;
     }
-
-    /* DESKTOP ICONS */
     .desktop { position:relative; width:100%; height:100% }
     .icon {
       width:72px; text-align:center; float:left; margin:20px;
@@ -24,8 +21,7 @@
       filter:drop-shadow(0 0 12px #0ff) saturate(200%);
       transition:filter .15s,transform .15s;
     }
-    .icon:hover .emoji,
-    .icon.active .emoji {
+    .icon:hover .emoji, .icon.active .emoji {
       transform:translateY(-4px) scale(1.1);
       filter:drop-shadow(0 0 20px #0ff) saturate(250%);
     }
@@ -33,8 +29,6 @@
       display:block; margin-top:6px; font-size:10px;
       text-shadow:0 0 4px rgba(0,0,0,.7);
     }
-
-    /* DOCK */
     .dock {
       position:absolute; bottom:48px; left:50%; transform:translateX(-50%);
       background:rgba(0,0,0,.6); padding:6px 12px; border-radius:16px;
@@ -42,22 +36,13 @@
     }
     .dock .icon { width:40px }
     .dock .emoji { font-size:32px }
-    .dock .icon:hover .emoji,
-    .dock .icon.active .emoji {
-      transform:scale(1.2)
-    }
-
-    /* TASKBAR */
+    .dock .icon:hover .emoji, .dock .icon.active .emoji { transform:scale(1.2) }
     .taskbar {
       position:absolute; bottom:0; left:0; width:100%; height:40px;
       background:rgba(0,0,0,.7); display:flex; align-items:center;
       padding:0 16px; font-size:10px;
     }
-    .taskbar .clock {
-      margin-left:auto; text-shadow:0 0 4px rgba(0,0,0,.7);
-    }
-
-    /* MUSIC CONTROL */
+    .taskbar .clock { margin-left:auto; text-shadow:0 0 4px rgba(0,0,0,.7) }
     .music-control {
       position:absolute; bottom:48px; left:16px; z-index:999;
     }
@@ -66,8 +51,6 @@
       background:#0ff; color:#000; border:1px solid #0cc;
       cursor:pointer; box-shadow:0 0 8px #0ff;
     }
-
-    /* WINDOWS */
     .window {
       position:absolute; display:none; flex-direction:column;
       width:400px; height:260px; background:rgba(0,0,16,.95);
@@ -97,6 +80,7 @@
 <body>
 
   <div class="desktop">
+    <!-- Desktop Icons -->
     <div class="icon" data-win="win-pump">
       <div class="emoji">🚀</div><label>PUMP.FUN</label>
     </div>
@@ -134,6 +118,7 @@
       <div class="emoji">🎵</div><label>MUSIC</label>
     </div>
 
+    <!-- Dock -->
     <div class="dock">
       <div class="icon" data-win="win-pump"><div class="emoji">🚀</div></div>
       <div class="icon" data-win="win-meme"><div class="emoji">🦈</div></div>
@@ -143,34 +128,36 @@
     </div>
   </div>
 
+  <!-- Taskbar -->
   <div class="taskbar">
     BrainrotOS Pump & Rug Deluxe
     <div class="clock">00:00</div>
   </div>
 
+  <!-- Music Control -->
   <div class="music-control">
     <button onclick="startMusic()">🎵 Play Music</button>
   </div>
-  <iframe id="bgmusic" allow="autoplay" style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
+  <iframe id="bgmusic" allow="autoplay"
+          style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
 
-  <!-- WINDOWS -->
-
-  <div id="win-pump" class="window" style="top:20px; left:20px;">
+  <!-- Windows -->
+  <div id="win-pump" class="window" style="top:20px;left:20px">
     <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
     <div class="content"><img src="images/pump.jpg" alt="Pump.fun"/></div>
   </div>
 
-  <div id="win-rug" class="window" style="top:20px; left:450px;">
+  <div id="win-rug" class="window" style="top:20px;left:450px">
     <div class="titlebar">RUG PULL <button class="close">✕</button></div>
-    <div class="content"><img src="images/rugpull.jpg" alt="Price Chart"/></div>
+    <div class="content"><img src="images/rugpull.jpg" alt="Rug Pull"/></div>
   </div>
 
-  <div id="win-meme" class="window" style="top:300px; left:20px;">
+  <div id="win-meme" class="window" style="top:300px;left:20px">
     <div class="titlebar">BRAINROT MEMES <button class="close">✕</button></div>
     <div class="content"><img src="images/brainrot.jpg" alt="Brainrot Meme"/></div>
   </div>
 
-  <div id="win-tweets" class="window" style="top:300px; left:450px;">
+  <div id="win-tweets" class="window" style="top:300px;left:450px">
     <div class="titlebar">LIVE CRYPTO TWEETS <button class="close">✕</button></div>
     <div class="content terminal">
       <p>“$PEPE just pumped 300% 🤯” – @MoonChad</p>
@@ -180,7 +167,7 @@
     </div>
   </div>
 
-  <div id="win-nft" class="window" style="top:600px; left:20px;">
+  <div id="win-nft" class="window" style="top:600px;left:20px">
     <div class="titlebar">UPCOMING NFT DROPS <button class="close">✕</button></div>
     <div class="content">
       <ul>
@@ -192,7 +179,7 @@
     </div>
   </div>
 
-  <div id="win-zoom" class="window" style="top:600px; left:450px;">
+  <div id="win-zoom" class="window" style="top:600px;left:450px">
     <div class="titlebar">ZOOMER CHAT <button class="close">✕</button></div>
     <div class="content">
       <p><strong>You:</strong> YOLO on $PUMP?</p>
@@ -202,12 +189,12 @@
     </div>
   </div>
 
-  <div id="win-gas" class="window" style="top:960px; left:20px;">
+  <div id="win-gas" class="window" style="top:960px;left:20px">
     <div class="titlebar">GAS TRACKER <button class="close">✕</button></div>
-    <div class="content"><img src="images/gastracker.jpg" alt="Gas Fees"/></div>
+    <div class="content"><img src="images/gastracker.jpg" alt="Gas Prices"/></div>
   </div>
 
-  <div id="win-whale" class="window" style="top:960px; left:450px;">
+  <div id="win-whale" class="window" style="top:960px;left:450px">
     <div class="titlebar">WHALE WATCH <button class="close">✕</button></div>
     <div class="content">
       <p>🚨 WALLET 0xAB…F320 moved:</p>
@@ -220,22 +207,22 @@
     </div>
   </div>
 
-  <div id="win-dex" class="window" style="top:1300px; left:20px;">
+  <div id="win-dex" class="window" style="top:1300px;left:20px">
     <div class="titlebar">DEX SCREENER <button class="close">✕</button></div>
     <div class="content"><img src="images/dex.jpg" alt="DEX Screener"/></div>
   </div>
 
-  <div id="win-fud" class="window" style="top:1300px; left:450px;">
+  <div id="win-fud" class="window" style="top:1300px;left:450px">
     <div class="titlebar">FUD METER <button class="close">✕</button></div>
     <div class="content"><img src="images/fud.jpg" alt="FUD Meter"/></div>
   </div>
 
-  <div id="win-ticker" class="window" style="top:1640px; left:20px;">
+  <div id="win-ticker" class="window" style="top:1640px;left:20px">
     <div class="titlebar">TICKER <button class="close">✕</button></div>
-    <div class="content"><img src="images/ticker.jpg" alt="Stonks Meme"/></div>
+    <div class="content"><img src="images/ticker.jpg" alt="Ticker"/></div>
   </div>
 
-  <div id="win-music" class="window" style="top:1640px; left:450px;">
+  <div id="win-music" class="window" style="top:1640px;left:450px">
     <div class="titlebar">MUSIC PLAYER <button class="close">✕</button></div>
     <div class="content">
       <p>Enter YouTube ID &amp; click Load:</p>
@@ -255,9 +242,9 @@
       document.querySelector('.clock').textContent=`${h}:${m}`;
     },1000);
 
-    // Autoplay music (also on first click)
+    // Autoplay music
     function startMusic(){
-      document.getElementById('bgmusic').src =
+      document.getElementById('bgmusic').src=
         'https://www.youtube.com/embed/DnxG7Qdghj0?autoplay=1&loop=1&playlist=DnxG7Qdghj0&controls=0';
       document.querySelector('.music-control').style.display='none';
     }
@@ -268,10 +255,10 @@
     document.querySelectorAll('.icon').forEach(ic=>{
       ic.onclick=()=>{
         const w=document.getElementById(ic.dataset.win);
-        if(!w) return;
-        const open=w.style.display==='flex';
-        w.style.display=open?'none':'flex';
-        ic.classList.toggle('active',!open);
+        if(!w)return;
+        const show = w.style.display!=='flex';
+        w.style.display = show?'flex':'none';
+        ic.classList.toggle('active',show);
       };
     });
 
@@ -284,18 +271,19 @@
       };
     });
 
-    // Draggable windows
+    // Draggable
     document.querySelectorAll('.window').forEach(win=>{
       const bar=win.querySelector('.titlebar');
       bar.onmousedown=e=>{
         const r=win.getBoundingClientRect(),
-              offX=e.clientX-r.left, offY=e.clientY-r.top;
-        function move(ev){
+              offX=e.clientX-r.left,
+              offY=e.clientY-r.top;
+        function mv(ev){
           win.style.left=ev.clientX-offX+'px';
-          win.style.top =ev.clientY-offY+'px';
+          win.style.top=ev.clientY-offY+'px';
         }
-        document.addEventListener('mousemove',move);
-        document.addEventListener('mouseup',()=>document.removeEventListener('mousemove',move),{once:true});
+        document.addEventListener('mousemove',mv);
+        document.addEventListener('mouseup',()=>document.removeEventListener('mousemove',mv),{once:true});
       };
       bar.ondragstart=()=>false;
     });
@@ -303,7 +291,7 @@
     // Manual YouTube load
     function playYT(){
       const id=document.getElementById('yt-id').value.trim();
-      document.getElementById('music-iframe').src =
+      document.getElementById('music-iframe').src=
         `https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&controls=1`;
     }
   </script>
