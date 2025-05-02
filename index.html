@@ -22,7 +22,7 @@
     }
     .icon img {
       width: 48px; height: 48px;
-      /* full-color, vibrant icons */
+      /* full-color neon glow */
       filter: drop-shadow(0 0 12px #0ff) saturate(200%);
       transition: filter .15s, transform .15s;
     }
@@ -100,64 +100,65 @@
   </style>
 </head>
 <body>
+
   <div class="desktop">
     <!-- Brainrot Apps -->
     <div class="icon" data-win="win-pump">
-      <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/rocket.png"/>
       <label>PUMP.FUN</label>
     </div>
     <div class="icon" data-win="win-rug">
-      <img src="https://cdn-icons-png.flaticon.com/512/633/633759.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/security-shield.png"/>
       <label>RUG PULL</label>
     </div>
     <div class="icon" data-win="win-meme">
-      <img src="https://cdn-icons-png.flaticon.com/512/4962/4962871.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/rolling-on-the-floor-laughing.png"/>
       <label>MEMES</label>
     </div>
     <div class="icon" data-win="win-tweets">
-      <img src="https://cdn-icons-png.flaticon.com/512/145/145812.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/twitter.png"/>
       <label>CRYPTO TWTS</label>
     </div>
     <div class="icon" data-win="win-nft">
-      <img src="https://cdn-icons-png.flaticon.com/512/1260/1260995.png"/>
+      <img src="https://img.icons8.com/color/48/000000/non-fungible-token.png"/>
       <label>NFT DROPS</label>
     </div>
     <div class="icon" data-win="win-zoom">
-      <img src="https://cdn-icons-png.flaticon.com/512/4140/4140046.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/headphones.png"/>
       <label>ZOOMER CHAT</label>
     </div>
     <div class="icon" data-win="win-gas">
-      <img src="https://cdn-icons-png.flaticon.com/512/809/809257.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/gas-station.png"/>
       <label>GAS TRACKER</label>
     </div>
     <div class="icon" data-win="win-whale">
-      <img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/whale-tail.png"/>
       <label>WHALE WATCH</label>
     </div>
     <div class="icon" data-win="win-dex">
-      <img src="https://cdn-icons-png.flaticon.com/512/185/185661.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/statistics.png"/>
       <label>DEX SCREENER</label>
     </div>
     <div class="icon" data-win="win-fud">
-      <img src="https://cdn-icons-png.flaticon.com/512/5269/5269603.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/speed-gauge.png"/>
       <label>FUD METER</label>
     </div>
     <div class="icon" data-win="win-ticker">
-      <img src="https://cdn-icons-png.flaticon.com/512/942/942751.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/stock-prices.png"/>
       <label>TICKER</label>
     </div>
     <div class="icon" data-win="win-music">
-      <img src="https://cdn-icons-png.flaticon.com/512/727/727210.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/musical-notes.png"/>
       <label>MUSIC</label>
     </div>
 
     <!-- Dock -->
     <div class="dock">
-      <div class="icon" data-win="win-pump"><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png"/></div>
-      <div class="icon" data-win="win-meme"><img src="https://cdn-icons-png.flaticon.com/512/4962/4962871.png"/></div>
-      <div class="icon" data-win="win-rug"><img src="https://cdn-icons-png.flaticon.com/512/633/633759.png"/></div>
-      <div class="icon" data-win="win-whale"><img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png"/></div>
-      <div class="icon" data-win="win-ticker"><img src="https://cdn-icons-png.flaticon.com/512/942/942751.png"/></div>
+      <div class="icon" data-win="win-pump"><img src="https://img.icons8.com/fluency/32/000000/rocket.png"/></div>
+      <div class="icon" data-win="win-meme"><img src="https://img.icons8.com/fluency/32/000000/rolling-on-the-floor-laughing.png"/></div>
+      <div class="icon" data-win="win-rug"><img src="https://img.icons8.com/fluency/32/000000/security-shield.png"/></div>
+      <div class="icon" data-win="win-whale"><img src="https://img.icons8.com/fluency/32/000000/whale-tail.png"/></div>
+      <div class="icon" data-win="win-ticker"><img src="https://img.icons8.com/fluency/32/000000/stock-prices.png"/></div>
     </div>
   </div>
 
@@ -290,55 +291,56 @@
   <script>
     // CLOCK
     setInterval(()=>{
-      let d=new Date(),
-          h=('0'+d.getHours()).slice(-2),
-          m=('0'+d.getMinutes()).slice(-2);
-      document.querySelector('.clock').textContent = h+':'+m;
+      const d=new Date(),
+            h=('0'+d.getHours()).slice(-2),
+            m=('0'+d.getMinutes()).slice(-2);
+      document.querySelector('.clock').textContent = `${h}:${m}`;
     },1000);
 
     // ICON CLICK & ACTIVE
     document.querySelectorAll('.icon').forEach(ic=>{
       ic.onclick = ()=>{
-        let w = document.getElementById(ic.dataset.win);
+        const w=document.getElementById(ic.dataset.win);
         if(!w) return;
-        let open = w.style.display==='flex';
-        w.style.display = open? 'none':'flex';
-        ic.classList.toggle('active', !open);
-        document.querySelectorAll('.dock .icon')
-          .forEach(d=> d.dataset.win===ic.dataset.win && d.classList.toggle('active', !open));
+        const open=w.style.display==='flex';
+        w.style.display=open?'none':'flex';
+        ic.classList.toggle('active',!open);
+        document.querySelectorAll('.dock .icon').forEach(d=>{
+          if(d.dataset.win===ic.dataset.win) d.classList.toggle('active',!open);
+        });
       };
     });
 
     // CLOSE
-    document.querySelectorAll('.close').forEach(btn=> btn.onclick=()=>{
-      let w = btn.closest('.window');
-      w.style.display='none';
-      document.querySelectorAll(`.icon[data-win="${w.id}"]`)
-        .forEach(ic=>ic.classList.remove('active'));
+    document.querySelectorAll('.close').forEach(btn=>{
+      btn.onclick=()=>{
+        const win=btn.closest('.window');
+        win.style.display='none';
+        document.querySelectorAll(`.icon[data-win="${win.id}"]`).forEach(ic=>ic.classList.remove('active'));
+      };
     });
 
     // DRAGGABLE
     document.querySelectorAll('.window').forEach(win=>{
-      let bar = win.querySelector('.titlebar');
-      bar.onmousedown = e=>{
-        let r = win.getBoundingClientRect(),
-            offX = e.clientX - r.left,
-            offY = e.clientY - r.top;
+      const bar=win.querySelector('.titlebar');
+      bar.onmousedown=e=>{
+        const r=win.getBoundingClientRect(),
+              offX=e.clientX-r.left, offY=e.clientY-r.top;
         function mv(e){
-          win.style.left = e.clientX-offX+'px';
-          win.style.top  = e.clientY-offY+'px';
+          win.style.left=`${e.clientX-offX}px`;
+          win.style.top=`${e.clientY-offY}px`;
         }
-        document.addEventListener('mousemove', mv);
-        document.addEventListener('mouseup', ()=>document.removeEventListener('mousemove', mv), { once:true });
+        document.addEventListener('mousemove',mv);
+        document.addEventListener('mouseup',()=>document.removeEventListener('mousemove',mv),{once:true});
       };
-      bar.ondragstart = ()=>false;
+      bar.ondragstart=()=>false;
     });
 
     // RUG RESCAN
-    const rugOut = document.getElementById('rug-output');
-    document.querySelector('[data-win="win-rug"]').onclick = ()=>{
+    const rugOut=document.getElementById('rug-output');
+    document.querySelector('[data-win="win-rug"]').onclick=()=>{
       setTimeout(()=>{
-        let ok = Math.random()>0.4;
+        const ok=Math.random()>0.4;
         rugOut.innerHTML=`
           <p>> scanning liquidity…</p>
           <p>> scanning dev wallet…</p>
@@ -349,8 +351,8 @@
     };
 
     // GAS RANDOMIZE
-    const gasOut = document.getElementById('gas-output');
-    document.querySelector('[data-win="win-gas"]').onclick = ()=>{
+    const gasOut=document.getElementById('gas-output');
+    document.querySelector('[data-win="win-gas"]').onclick=()=>{
       gasOut.innerHTML=`
         <p>> fast: <strong>${60+Math.floor(Math.random()*100)} GWEI</strong></p>
         <p>> standard: <strong>${40+Math.floor(Math.random()*60)} GWEI</strong></p>
@@ -360,10 +362,10 @@
     };
 
     // FUD METER
-    const fudOut = document.getElementById('fud-output');
-    document.querySelector('[data-win="win-fud"]').onclick = ()=>{
-      let fud = Math.floor(Math.random()*100),
-          hype= Math.floor(Math.random()*100);
+    const fudOut=document.getElementById('fud-output');
+    document.querySelector('[data-win="win-fud"]').onclick=()=>{
+      const fud=Math.floor(Math.random()*100),
+            hype=Math.floor(Math.random()*100);
       fudOut.innerHTML=`
         <p>> FUD LEVEL: ${fud}%</p>
         <p>> HYPE SCORE: ${hype}/100</p>
@@ -372,26 +374,26 @@
 
     // CRYPTO TICKER
     function updateTicker(){
-      let out = document.getElementById('ticker-output');
-      out.innerHTML = '';
+      const out=document.getElementById('ticker-output');
+      out.innerHTML='';
       ['DOGE','SHIB','FLOKI'].forEach(sym=>{
-        let price = (Math.random()*(sym==='DOGE'?0.5:0.00002)+(sym==='DOGE'?0.2:0.00002)).toFixed(6),
-            ch    = (Math.random()*100-50).toFixed(1);
-        let p = document.createElement('p');
-        p.textContent = `${sym}: $${price} (${ch}%)`;
+        const price=(Math.random()*(sym==='DOGE'?0.5:0.00002)+(sym==='DOGE'?0.2:0.00002)).toFixed(6),
+              ch=(Math.random()*100-50).toFixed(1),
+              p=document.createElement('p');
+        p.textContent=`${sym}: $${price} (${ch}%)`;
         out.appendChild(p);
       });
-      let foot = document.createElement('p');
-      foot.innerHTML = '<em>updates every 3s</em>';
+      const foot=document.createElement('p');
+      foot.innerHTML='<em>updates every 3s</em>';
       out.appendChild(foot);
     }
     updateTicker();
-    setInterval(updateTicker, 3000);
+    setInterval(updateTicker,3000);
 
     // MUSIC PLAYER
     function playYT(){
-      let id = document.getElementById('yt-id').value.trim();
-      document.getElementById('music-iframe').src =
+      const id=document.getElementById('yt-id').value.trim();
+      document.getElementById('music-iframe').src=
         `https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&controls=1`;
     }
   </script>
