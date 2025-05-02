@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BrainrotOS • Pump & Rug Deluxe</title>
+  <title>BrainrotOS • Pump & Rug Deluxe</n  >
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
   <style>
     /* RESET & BASE */
@@ -19,10 +19,10 @@
     .icon {
       width: 72px; text-align: center; float: left; margin: 20px; user-select: none;
       transition: transform .15s;
+      cursor: pointer;
     }
     .icon img {
       width: 48px; height: 48px;
-      /* full-color neon glow */
       filter: drop-shadow(0 0 12px #0ff) saturate(200%);
       transition: filter .15s, transform .15s;
     }
@@ -65,6 +65,17 @@
       text-shadow: 0 0 4px rgba(0,0,0,0.7);
     }
 
+    /* MUSIC BUTTON */
+    .music-control {
+      position: absolute; bottom: 48px; left: 16px; z-index: 999;
+    }
+    .music-control button {
+      font-family: 'Press Start 2P'; font-size: 10px;
+      padding: 4px 8px; background: #0ff; color: #000;
+      border: 1px solid #0cc; cursor: pointer;
+      box-shadow: 0 0 8px #0ff;
+    }
+
     /* WINDOWS */
     .window {
       position: absolute; display: none; flex-direction: column;
@@ -92,11 +103,7 @@
       padding: 8px; height: 100%; overflow: auto;
     }
     iframe { width: 100%; height: 100%; border: none; background: #fff; }
-    input, button {
-      font-family: 'Press Start 2P'; font-size: 10px;
-      background: #0ff; color: #111; border: none; padding: 4px 8px;
-      cursor: pointer; margin-top: 6px;
-    }
+    input, button { font-family: 'Press Start 2P'; font-size: 10px; }
   </style>
 </head>
 <body>
@@ -120,11 +127,11 @@
       <label>CRYPTO TWTS</label>
     </div>
     <div class="icon" data-win="win-nft">
-      <img src="https://img.icons8.com/color/48/000000/non-fungible-token.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/non-fungible-token.png"/>
       <label>NFT DROPS</label>
     </div>
     <div class="icon" data-win="win-zoom">
-      <img src="https://img.icons8.com/fluency/48/000000/headphones.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/chat.png"/>
       <label>ZOOMER CHAT</label>
     </div>
     <div class="icon" data-win="win-gas">
@@ -136,7 +143,7 @@
       <label>WHALE WATCH</label>
     </div>
     <div class="icon" data-win="win-dex">
-      <img src="https://img.icons8.com/fluency/48/000000/statistics.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/combo-chart.png"/>
       <label>DEX SCREENER</label>
     </div>
     <div class="icon" data-win="win-fud">
@@ -144,7 +151,7 @@
       <label>FUD METER</label>
     </div>
     <div class="icon" data-win="win-ticker">
-      <img src="https://img.icons8.com/fluency/48/000000/stock-prices.png"/>
+      <img src="https://img.icons8.com/fluency/48/000000/trending-up.png"/>
       <label>TICKER</label>
     </div>
     <div class="icon" data-win="win-music">
@@ -158,7 +165,7 @@
       <div class="icon" data-win="win-meme"><img src="https://img.icons8.com/fluency/32/000000/rolling-on-the-floor-laughing.png"/></div>
       <div class="icon" data-win="win-rug"><img src="https://img.icons8.com/fluency/32/000000/security-shield.png"/></div>
       <div class="icon" data-win="win-whale"><img src="https://img.icons8.com/fluency/32/000000/whale-tail.png"/></div>
-      <div class="icon" data-win="win-ticker"><img src="https://img.icons8.com/fluency/32/000000/stock-prices.png"/></div>
+      <div class="icon" data-win="win-ticker"><img src="https://img.icons8.com/fluency/32/000000/trending-up.png"/></div>
     </div>
   </div>
 
@@ -168,10 +175,20 @@
     <div class="clock">00:00</div>
   </div>
 
+  <!-- MUSIC BUTTON -->
+  <div class="music-control">
+    <button onclick="startMusic()">🎵 Play Music</button>
+  </div>
+
+  <!-- HIDDEN BACKGROUND MUSIC -->
+  <iframe id="bgmusic" src="" style="position:absolute;width:0;height:0;border:0;opacity:0;" allow="autoplay"></iframe>
+
   <!-- WINDOWS -->
   <div id="win-pump" class="window" style="top:20px; left:20px;">
     <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
-    <div class="content"><iframe src="https://pump.fun"></iframe></div>
+    <div class="content"><!-- external open only -->
+      <p>Opens external site on icon click.</p>
+    </div>
   </div>
 
   <div id="win-rug" class="window" style="top:20px; left:450px;">
@@ -187,11 +204,13 @@
 
   <div id="win-meme" class="window" style="top:300px; left:20px;">
     <div class="titlebar">BRAINROT MEMES <button class="close">✕</button></div>
-    <div class="content" style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+    <div class="content" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
       <img src="https://i.imgflip.com/1ur9b0.jpg" alt="Distracted Boyfriend"/>
       <img src="https://i.imgflip.com/1jwhww.jpg" alt="Expanding Brain"/>
       <img src="https://i.imgflip.com/2kbn1e.jpg" alt="Surprised Pikachu"/>
       <img src="https://i.imgflip.com/3si4.jpg" alt="Woman Yelling at Cat"/>
+      <img src="https://i.imgflip.com/30b1gx.jpg" alt="Two Buttons"/>
+      <img src="https://i.imgflip.com/1bgw.jpg" alt="Drake Hotline Bling"/>
     </div>
   </div>
 
@@ -281,100 +300,100 @@
     </div>
   </div>
 
-  <!-- BACKGROUND MUSIC -->
-  <iframe
-    src="https://www.youtube.com/embed/DnxG7Qdghj0?autoplay=1&loop=1&playlist=DnxG7Qdghj0&controls=0"
-    style="position:absolute;width:0;height:0;border:0;opacity:0;"
-    allow="autoplay">
-  </iframe>
-
   <script>
     // CLOCK
     setInterval(()=>{
-      const d=new Date(),
-            h=('0'+d.getHours()).slice(-2),
-            m=('0'+d.getMinutes()).slice(-2);
+      const d=new Date(), h=('0'+d.getHours()).slice(-2), m=('0'+d.getMinutes()).slice(-2);
       document.querySelector('.clock').textContent = `${h}:${m}`;
     },1000);
 
-    // ICON CLICK & ACTIVE
+    // Start background music on load
+    function startMusic() {
+      document.getElementById('bgmusic').src =
+        'https://www.youtube.com/embed/DnxG7Qdghj0?autoplay=1&loop=1&playlist=DnxG7Qdghj0&controls=0';
+    }
+    window.addEventListener('DOMContentLoaded', startMusic);
+
+    // ICON CLICK & ACTIVE + pump.fun external
     document.querySelectorAll('.icon').forEach(ic=>{
       ic.onclick = ()=>{
-        const w=document.getElementById(ic.dataset.win);
-        if(!w) return;
-        const open=w.style.display==='flex';
-        w.style.display=open?'none':'flex';
-        ic.classList.toggle('active',!open);
-        document.querySelectorAll('.dock .icon').forEach(d=>{
-          if(d.dataset.win===ic.dataset.win) d.classList.toggle('active',!open);
-        });
+        const win = document.getElementById(ic.dataset.win);
+        if(ic.dataset.win==='win-pump') {
+          window.open('https://pump.fun', '_blank');
+          return;
+        }
+        if(!win) return;
+        const open = win.style.display==='flex';
+        win.style.display = open? 'none':'flex';
+        ic.classList.toggle('active', !open);
+        document.querySelectorAll('.dock .icon')
+          .forEach(d=> d.dataset.win===ic.dataset.win && d.classList.toggle('active', !open));
       };
     });
 
     // CLOSE
-    document.querySelectorAll('.close').forEach(btn=>{
-      btn.onclick=()=>{
-        const win=btn.closest('.window');
-        win.style.display='none';
-        document.querySelectorAll(`.icon[data-win="${win.id}"]`).forEach(ic=>ic.classList.remove('active'));
-      };
+    document.querySelectorAll('.close').forEach(btn=> btn.onclick=()=>{
+      const win = btn.closest('.window');
+      win.style.display='none';
+      document.querySelectorAll(`.icon[data-win="${win.id}"]`)
+        .forEach(ic=>ic.classList.remove('active'));
     });
 
     // DRAGGABLE
     document.querySelectorAll('.window').forEach(win=>{
-      const bar=win.querySelector('.titlebar');
-      bar.onmousedown=e=>{
-        const r=win.getBoundingClientRect(),
-              offX=e.clientX-r.left, offY=e.clientY-r.top;
-        function mv(e){
-          win.style.left=`${e.clientX-offX}px`;
-          win.style.top=`${e.clientY-offY}px`;
+      const bar = win.querySelector('.titlebar');
+      bar.onmousedown = e=>{
+        const r = win.getBoundingClientRect(),
+              offX = e.clientX-r.left, offY = e.clientY-r.top;
+        function mv(e) {
+          win.style.left = e.clientX-offX+'px';
+          win.style.top  = e.clientY-offY+'px';
         }
-        document.addEventListener('mousemove',mv);
-        document.addEventListener('mouseup',()=>document.removeEventListener('mousemove',mv),{once:true});
+        document.addEventListener('mousemove', mv);
+        document.addEventListener('mouseup', ()=>document.removeEventListener('mousemove', mv), { once:true });
       };
-      bar.ondragstart=()=>false;
+      bar.ondragstart = ()=>false;
     });
 
     // RUG RESCAN
-    const rugOut=document.getElementById('rug-output');
-    document.querySelector('[data-win="win-rug"]').onclick=()=>{
+    const rugOut = document.getElementById('rug-output');
+    document.querySelector('[data-win="win-rug"]').onclick = ()=>{
       setTimeout(()=>{
-        const ok=Math.random()>0.4;
-        rugOut.innerHTML=`
-          <p>> scanning liquidity…</p>
-          <p>> scanning dev wallet…</p>
-          <p>> RESULT: <strong>${ok?'SAFE ✅':'RUG 🚨'}</strong></p>
-          <p>> last rug: <em>$MELTDOWN</em></p>
-          <p><em>click to re-scan</em></p>`;
-      },400);
+        const ok = Math.random()>0.4;
+        rugOut.innerHTML =
+          `<p>> scanning liquidity…</p>` +
+          `<p>> scanning dev wallet…</p>` +
+          `<p>> RESULT: <strong>${ok?'SAFE ✅':'RUG 🚨'}</strong></p>` +
+          `<p>> last rug pull: <em>$MELTDOWN</em></p>` +
+          `<p><em>click icon to re-scan</em></p>`;
+      }, 400);
     };
 
     // GAS RANDOMIZE
-    const gasOut=document.getElementById('gas-output');
-    document.querySelector('[data-win="win-gas"]').onclick=()=>{
-      gasOut.innerHTML=`
-        <p>> fast: <strong>${60+Math.floor(Math.random()*100)} GWEI</strong></p>
-        <p>> standard: <strong>${40+Math.floor(Math.random()*60)} GWEI</strong></p>
-        <p>> slow: <strong>${10+Math.floor(Math.random()*40)} GWEI</strong></p>
-        <p>> avg tx time: <strong>${10+Math.floor(Math.random()*50)}s</strong></p>
-        <p><em>click icon to randomize</em></p>`;
+    const gasOut = document.getElementById('gas-output');
+    document.querySelector('[data-win="win-gas"]').onclick = ()=>{
+      gasOut.innerHTML =
+        `<p>> fast: <strong>${60+Math.floor(Math.random()*100)} GWEI</strong></p>` +
+        `<p>> standard: <strong>${40+Math.floor(Math.random()*60)} GWEI</strong></p>` +
+        `<p>> slow: <strong>${10+Math.floor(Math.random()*40)} GWEI</strong></p>` +
+        `<p>> avg tx time: <strong>${10+Math.floor(Math.random()*50)}s</strong></p>` +
+        `<p><em>click icon to randomize</em></p>`;
     };
 
     // FUD METER
-    const fudOut=document.getElementById('fud-output');
-    document.querySelector('[data-win="win-fud"]').onclick=()=>{
-      const fud=Math.floor(Math.random()*100),
-            hype=Math.floor(Math.random()*100);
-      fudOut.innerHTML=`
-        <p>> FUD LEVEL: ${fud}%</p>
-        <p>> HYPE SCORE: ${hype}/100</p>
-        <p><em>click to refresh</em></p>`;
+    const fudOut = document.getElementById('fud-output');
+    document.querySelector('[data-win="win-fud"]').onclick = ()=>{
+      const fud = Math.floor(Math.random()*100),\
+ hype = Math.floor(Math.random()*100);
+      fudOut.innerHTML =
+        `<p>> FUD LEVEL: ${fud}%</p>` +
+        `<p>> HYPE SCORE: ${hype}/100</p>` +
+        `<p><em>click icon to refresh</em></p>`;
     };
 
     // CRYPTO TICKER
     function updateTicker(){
-      const out=document.getElementById('ticker-output');
+      const out = document.getElementById('ticker-output');
       out.innerHTML='';
       ['DOGE','SHIB','FLOKI'].forEach(sym=>{
         const price=(Math.random()*(sym==='DOGE'?0.5:0.00002)+(sym==='DOGE'?0.2:0.00002)).toFixed(6),
@@ -383,12 +402,10 @@
         p.textContent=`${sym}: $${price} (${ch}%)`;
         out.appendChild(p);
       });
-      const foot=document.createElement('p');
-      foot.innerHTML='<em>updates every 3s</em>';
+      const foot=document.createElement('p'); foot.innerHTML='<em>updates every 3s</em>';
       out.appendChild(foot);
     }
-    updateTicker();
-    setInterval(updateTicker,3000);
+    updateTicker(); setInterval(updateTicker,3000);
 
     // MUSIC PLAYER
     function playYT(){
