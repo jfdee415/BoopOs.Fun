@@ -83,7 +83,6 @@
 <body>
 
   <div class="desktop">
-    <!-- Desktop Icons -->
     <div class="icon" data-win="win-pump"><div class="emoji">🚀</div><label>PUMP.FUN</label></div>
     <div class="icon" data-win="win-rug"><div class="emoji">📉</div><label>RUG PULL</label></div>
     <div class="icon" data-win="win-meme"><div class="emoji">🦈</div><label>MEMES</label></div>
@@ -97,7 +96,6 @@
     <div class="icon" data-win="win-ticker"><div class="emoji">📈</div><label>TICKER</label></div>
     <div class="icon" data-win="win-music"><div class="emoji">🎵</div><label>MUSIC</label></div>
 
-    <!-- Dock -->
     <div class="dock">
       <div class="icon" data-win="win-pump"><div class="emoji">🚀</div></div>
       <div class="icon" data-win="win-meme"><div class="emoji">🦈</div></div>
@@ -107,20 +105,18 @@
     </div>
   </div>
 
-  <!-- Taskbar -->
   <div class="taskbar">
     BrainrotOS Pump & Rug Deluxe
     <div class="clock">00:00</div>
   </div>
 
-  <!-- Music Control -->
   <div class="music-control">
     <button onclick="startMusic()">🎵 Play Music</button>
   </div>
   <iframe id="bgmusic" allow="autoplay"
           style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
 
-  <!-- Windows -->
+  <!-- WINDOWS (no inline positions) -->
   <div id="win-pump" class="window">
     <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
     <div class="content"><img src="images/pump.jpg" alt="Pump.fun"/></div>
@@ -213,49 +209,47 @@
   </div>
 
   <script>
-    // 1) map each window to its open position
+    // predefined top/left per window
     const positions = {
-      'win-pump':    { top:'100px', left:'20px' },
-      'win-rug':     { top:'100px', left:'450px' },
-      'win-meme':    { top:'360px', left:'20px' },
-      'win-tweets':  { top:'360px', left:'450px' },
-      'win-nft':     { top:'620px', left:'20px' },
-      'win-zoom':    { top:'620px', left:'450px' },
-      'win-gas':     { top:'880px', left:'20px' },
-      'win-whale':   { top:'880px', left:'450px' },
-      'win-dex':     { top:'1140px', left:'20px' },
-      'win-fud':     { top:'1140px', left:'450px' },
-      'win-ticker':  { top:'1140px', left:'880px' },
-      'win-music':   { top:'1400px', left:'450px' }
+      'win-pump':   { top:'100px',  left:'20px' },
+      'win-rug':    { top:'100px',  left:'450px' },
+      'win-meme':   { top:'360px',  left:'20px' },
+      'win-tweets': { top:'360px',  left:'450px' },
+      'win-nft':    { top:'620px',  left:'20px' },
+      'win-zoom':   { top:'620px',  left:'450px' },
+      'win-gas':    { top:'880px',  left:'20px' },
+      'win-whale':  { top:'880px',  left:'450px' },
+      'win-dex':    { top:'1140px', left:'20px' },
+      'win-fud':    { top:'1140px', left:'450px' },
+      'win-ticker': { top:'1140px', left:'880px' },
+      'win-music':  { top:'1400px', left:'450px' }
     };
 
-    // clock
+    // update clock
     setInterval(()=>{
       const d=new Date(),
-            hh=('0'+d.getHours()).slice(-2),
-            mm=('0'+d.getMinutes()).slice(-2);
-      document.querySelector('.clock').textContent=`${hh}:${mm}`;
+            h=('0'+d.getHours()).slice(-2),
+            m=('0'+d.getMinutes()).slice(-2);
+      document.querySelector('.clock').textContent=`${h}:${m}`;
     },1000);
 
-    // autoplay background music
+    // autoplay bg music
     function startMusic(){
-      document.getElementById('bgmusic').src =
+      document.getElementById('bgmusic').src=
         'https://www.youtube.com/embed/DnxG7Qdghj0?autoplay=1&loop=1&playlist=DnxG7Qdghj0&controls=0';
       document.querySelector('.music-control').style.display='none';
     }
     window.addEventListener('load', startMusic);
     document.body.addEventListener('click', startMusic, { once:true });
 
-    // open/position windows
+    // icon click → position & toggle its window
     document.querySelectorAll('.icon').forEach(ic=>{
       ic.onclick = ()=>{
         const win = document.getElementById(ic.dataset.win);
-        if(!win) return console.warn('No window for', ic.dataset.win);
-        // set its mapped coords
+        if (!win) return;
         const pos = positions[win.id];
         win.style.top  = pos.top;
         win.style.left = pos.left;
-        // toggle visible
         const showing = win.style.display === 'flex';
         win.style.display = showing ? 'none' : 'flex';
         ic.classList.toggle('active', !showing);
@@ -272,7 +266,7 @@
       };
     });
 
-    // make windows draggable
+    // draggable
     document.querySelectorAll('.window').forEach(win=>{
       const bar = win.querySelector('.titlebar');
       bar.onmousedown = e=>{
@@ -294,7 +288,7 @@
     // manual YouTube load
     function playYT(){
       const id = document.getElementById('yt-id').value.trim();
-      document.getElementById('music-iframe').src =
+      document.getElementById('music-iframe').src=
         `https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&controls=1`;
     }
   </script>
