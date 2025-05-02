@@ -57,7 +57,7 @@
       position:absolute; display:none; flex-direction:column;
       width:400px; height:260px; background:rgba(0,0,16,.95);
       border:2px solid #0ff; box-shadow:0 0 16px #0ff;
-      overflow:hidden; z-index:1000; /* bring above dock/taskbar */
+      overflow:hidden; z-index:1000;
     }
     .titlebar {
       background:#0ff; color:#111; padding:6px 10px;
@@ -83,7 +83,6 @@
 <body>
 
   <div class="desktop">
-    <!-- DESKTOP ICONS -->
     <div class="icon" data-win="win-pump"><div class="emoji">🚀</div><label>PUMP.FUN</label></div>
     <div class="icon" data-win="win-rug"><div class="emoji">📉</div><label>RUG PULL</label></div>
     <div class="icon" data-win="win-meme"><div class="emoji">🦈</div><label>MEMES</label></div>
@@ -97,7 +96,6 @@
     <div class="icon" data-win="win-ticker"><div class="emoji">📈</div><label>TICKER</label></div>
     <div class="icon" data-win="win-music"><div class="emoji">🎵</div><label>MUSIC</label></div>
 
-    <!-- DOCK -->
     <div class="dock">
       <div class="icon" data-win="win-pump"><div class="emoji">🚀</div></div>
       <div class="icon" data-win="win-meme"><div class="emoji">🦈</div></div>
@@ -107,110 +105,59 @@
     </div>
   </div>
 
-  <!-- TASKBAR -->
   <div class="taskbar">
     BrainrotOS Pump & Rug Deluxe
     <div class="clock">00:00</div>
   </div>
 
-  <!-- MUSIC CONTROL -->
   <div class="music-control">
     <button onclick="startMusic()">🎵 Play Music</button>
   </div>
-  <iframe id="bgmusic" allow="autoplay"
-          style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
+  <iframe id="bgmusic" allow="autoplay" style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
 
-  <!-- WINDOWS -->
-  <div id="win-pump" class="window" style="top:20px; left:20px;">
-    <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
-    <div class="content"><img src="images/pump.jpg" alt="Pump.fun"/></div>
-  </div>
-
-  <div id="win-rug" class="window" style="top:20px; left:450px;">
-    <div class="titlebar">RUG PULL <button class="close">✕</button></div>
-    <div class="content"><img src="images/rugpull.jpg" alt="Rug Pull"/></div>
-  </div>
-
-  <div id="win-meme" class="window" style="top:300px; left:20px;">
-    <div class="titlebar">BRAINROT MEMES <button class="close">✕</button></div>
-    <div class="content"><img src="images/brainrot.jpg" alt="Brainrot Meme"/></div>
-  </div>
-
-  <div id="win-tweets" class="window" style="top:300px; left:450px;">
-    <div class="titlebar">LIVE CRYPTO TWEETS <button class="close">✕</button></div>
-    <div class="content terminal">
-      <p>“$PEPE just pumped 300% 🤯” – @MoonChad</p>
-      <p>“Rug pull incoming? 🤔 #FUD” – @HODLer99</p>
-      <p>“gas fees are insane rn ⛽” – @OnChainZoomer</p>
-      <p>“who’s in $GME? 🚀🚀” – @WallChad</p>
-    </div>
-  </div>
-
-  <div id="win-nft" class="window" style="top:600px; left:20px;">
-    <div class="titlebar">UPCOMING NFT DROPS <button class="close">✕</button></div>
-    <div class="content">
-      <ul>
-        <li>⚡ PunkWolves — 5/20 @ 4PM UTC</li>
-        <li>🌌 GalaxyGhz — 5/21 @ 8PM UTC</li>
-        <li>🐉 DragonLoot — 5/22 @ 2PM UTC</li>
-        <li>👾 ZoomerHeads — 5/23 @ 12PM UTC</li>
-      </ul>
-    </div>
-  </div>
-
-  <div id="win-zoom" class="window" style="top:600px; left:450px;">
-    <div class="titlebar">ZOOMER CHAT <button class="close">✕</button></div>
-    <div class="content">
-      <p><strong>You:</strong> YOLO on $PUMP?</p>
-      <p><strong>Peer:</strong> fr fr 🚀🚀</p>
-      <p><strong>You:</strong> gas fees hurt 😭</p>
-      <p><strong>Peer:</strong> hold til rug 🤡</p>
-    </div>
-  </div>
-
-  <div id="win-gas" class="window" style="top:920px; left:20px;">
-    <div class="titlebar">GAS TRACKER <button class="close">✕</button></div>
-    <div class="content"><img src="images/gastracker.jpg" alt="Gas Prices"/></div>
-  </div>
-
-  <div id="win-whale" class="window" style="top:920px; left:450px;">
-    <div class="titlebar">WHALE WATCH <button class="close">✕</button></div>
-    <div class="content">
-      <p>🚨 WALLET 0xAB…F320 moved:</p>
-      <ul>
-        <li>10 000 $DOGE → $DOGEPOOL</li>
-        <li>25 Ξ → Uniswap</li>
-        <li>5 000 000 $SHIB → Pancake</li>
-      </ul>
-      <p><em>Last update: just now</em></p>
-    </div>
-  </div>
-
-  <div id="win-dex" class="window" style="top:1240px; left:20px;">
-    <div class="titlebar">DEX SCREENER <button class="close">✕</button></div>
-    <div class="content"><img src="images/dex.jpg" alt="DEX Screener"/></div>
-  </div>
-
-  <div id="win-fud" class="window" style="top:1240px; left:450px;">
-    <div class="titlebar">FUD METER <button class="close">✕</button></div>
-    <div class="content"><img src="images/fud.jpg" alt="FUD Meter"/></div>
-  </div>
-
-  <div id="win-ticker" class="window" style="top:1240px; left:880px;">
-    <div class="titlebar">TICKER <button class="close">✕</button></div>
-    <div class="content"><img src="images/ticker.jpg" alt="Ticker"/></div>
-  </div>
-
-  <div id="win-music" class="window" style="top:1640px; left:450px;">
-    <div class="titlebar">MUSIC PLAYER <button class="close">✕</button></div>
-    <div class="content">
-      <p>Enter YouTube ID &amp; click Load:</p>
-      <input id="yt-id" placeholder="DnxG7Qdghj0" style="width:100%;"/>
-      <button onclick="playYT()">Load</button>
-      <div style="height:8px;"></div>
-      <iframe id="music-iframe" allow="autoplay" allowfullscreen></iframe>
-    </div>
-  </div>
+  <div id="win-pump" class="window"><div class="titlebar">PUMP.FUN <button class="close">✕</button></div><div class="content"><img src="images/pump.jpg" alt="Pump.fun"/></div></div>
+  <div id="win-rug" class="window"><div class="titlebar">RUG PULL <button class="close">✕</button></div><div class="content"><img src="images/rugpull.jpg" alt="Rug Pull"/></div></div>
+  <div id="win-meme" class="window"><div class="titlebar">BRAINROT MEMES <button class="close">✕</button></div><div class="content"><img src="images/brainrot.jpg" alt="Brainrot Meme"/></div></div>
+  <div id="win-tweets" class="window"><div class="titlebar">LIVE CRYPTO TWEETS <button class="close">✕</button></div><div class="content terminal">
+    <p>“$PEPE just pumped 300% 🤯” – @MoonChad</p>
+    <p>“Rug pull incoming? 🤔 #FUD” – @HODLer99</p>
+    <p>“gas fees are insane rn ⛽” – @OnChainZoomer</p>
+    <p>“who’s in $GME? 🚀🚀” – @WallChad</p>
+  </div></div>
+  <div id="win-nft" class="window"><div class="titlebar">UPCOMING NFT DROPS <button class="close">✕</button></div><div class="content">
+    <ul>
+      <li>⚡ PunkWolves — 5/20 @ 4PM UTC</li>
+      <li>🌌 GalaxyGhz — 5/21 @ 8PM UTC</li>
+      <li>🐉 DragonLoot — 5/22 @ 2PM UTC</li>
+      <li>👾 ZoomerHeads — 5/23 @ 12PM UTC</li>
+    </ul>
+  </div></div>
+  <div id="win-zoom" class="window"><div class="titlebar">ZOOMER CHAT <button class="close">✕</button></div><div class="content">
+    <p><strong>You:</strong> YOLO on $PUMP?</p>
+    <p><strong>Peer:</strong> fr fr 🚀🚀</p>
+    <p><strong>You:</strong> gas fees hurt 😭</p>
+    <p><strong>Peer:</strong> hold til rug 🤡</p>
+  </div></div>
+  <div id="win-gas" class="window"><div class="titlebar">GAS TRACKER <button class="close">✕</button></div><div class="content"><img src="images/gastracker.jpg" alt="Gas Prices"/></div></div>
+  <div id="win-whale" class="window"><div class="titlebar">WHALE WATCH <button class="close">✕</button></div><div class="content">
+    <p>🚨 WALLET 0xAB…F320 moved:</p>
+    <ul>
+      <li>10 000 $DOGE → $DOGEPOOL</li>
+      <li>25 Ξ → Uniswap</li>
+      <li>5 000 000 $SHIB → Pancake</li>
+    </ul>
+    <p><em>Last update: just now</em></p>
+  </div></div>
+  <div id="win-dex" class="window"><div class="titlebar">DEX SCREENER <button class="close">✕</button></div><div class="content"><img src="images/dex.jpg" alt="DEX Screener"/></div></div>
+  <div id="win-fud" class="window"><div class="titlebar">FUD METER <button class="close">✕</button></div><div class="content"><img src="images/fud.jpg" alt="FUD Meter"/></div></div>
+  <div id="win-ticker" class="window"><div class="titlebar">TICKER <button class="close">✕</button></div><div class="content"><img src="images/ticker.jpg" alt="Ticker"/></div></div>
+  <div id="win-music" class="window"><div class="titlebar">MUSIC PLAYER <button class="close">✕</button></div><div class="content">
+    <p>Enter YouTube ID &amp; click Load:</p>
+    <input id="yt-id" placeholder="DnxG7Qdghj0" style="width:100%;"/>
+    <button onclick="playYT()">Load</button>
+    <div style="height:8px;"></div>
+    <iframe id="music-iframe" allow="autoplay" allowfullscreen></iframe>
+  </div></div>
 
   <script>
     // clock
@@ -230,11 +177,14 @@
     window.addEventListener('load',startMusic);
     document.body.addEventListener('click',startMusic,{once:true});
 
-    // toggle windows
+    // toggle & force position to top-right
     document.querySelectorAll('.icon').forEach(ic=>{
       ic.onclick=()=>{
         const win = document.getElementById(ic.dataset.win);
         if(!win) return;
+        // force above dock, top-right
+        win.style.top  = '100px';
+        win.style.left = 'calc(100% - 420px)';
         const show = win.style.display!=='flex';
         win.style.display = show?'flex':'none';
         ic.classList.toggle('active', show);
