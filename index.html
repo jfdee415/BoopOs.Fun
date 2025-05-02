@@ -16,12 +16,13 @@
       width:72px; text-align:center; float:left; margin:20px;
       transition:transform .15s; user-select:none; cursor:pointer;
     }
-    .icon .emoji {
+    .emoji {
       font-size:48px; line-height:1;
       filter:drop-shadow(0 0 12px #0ff) saturate(200%);
       transition:filter .15s,transform .15s;
     }
-    .icon:hover .emoji, .icon.active .emoji {
+    .icon:hover .emoji,
+    .icon.active .emoji {
       transform:translateY(-4px) scale(1.1);
       filter:drop-shadow(0 0 20px #0ff) saturate(250%);
     }
@@ -36,13 +37,18 @@
     }
     .dock .icon { width:40px }
     .dock .emoji { font-size:32px }
-    .dock .icon:hover .emoji, .dock .icon.active .emoji { transform:scale(1.2) }
+    .dock .icon:hover .emoji,
+    .dock .icon.active .emoji {
+      transform:scale(1.2);
+    }
     .taskbar {
       position:absolute; bottom:0; left:0; width:100%; height:40px;
       background:rgba(0,0,0,.7); display:flex; align-items:center;
       padding:0 16px; font-size:10px;
     }
-    .taskbar .clock { margin-left:auto; text-shadow:0 0 4px rgba(0,0,0,.7) }
+    .taskbar .clock {
+      margin-left:auto; text-shadow:0 0 4px rgba(0,0,0,.7);
+    }
     .music-control {
       position:absolute; bottom:48px; left:16px; z-index:999;
     }
@@ -79,8 +85,8 @@
 </head>
 <body>
 
+  <!-- DESKTOP ICONS -->
   <div class="desktop">
-    <!-- Desktop Icons -->
     <div class="icon" data-win="win-pump">
       <div class="emoji">🚀</div><label>PUMP.FUN</label>
     </div>
@@ -118,7 +124,7 @@
       <div class="emoji">🎵</div><label>MUSIC</label>
     </div>
 
-    <!-- Dock -->
+    <!-- DOCK -->
     <div class="dock">
       <div class="icon" data-win="win-pump"><div class="emoji">🚀</div></div>
       <div class="icon" data-win="win-meme"><div class="emoji">🦈</div></div>
@@ -128,20 +134,20 @@
     </div>
   </div>
 
-  <!-- Taskbar -->
+  <!-- TASKBAR -->
   <div class="taskbar">
     BrainrotOS Pump & Rug Deluxe
     <div class="clock">00:00</div>
   </div>
 
-  <!-- Music Control -->
+  <!-- MUSIC CONTROL -->
   <div class="music-control">
     <button onclick="startMusic()">🎵 Play Music</button>
   </div>
   <iframe id="bgmusic" allow="autoplay"
           style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
 
-  <!-- Windows -->
+  <!-- WINDOWS -->
   <div id="win-pump" class="window" style="top:20px;left:20px">
     <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
     <div class="content"><img src="images/pump.jpg" alt="Pump.fun"/></div>
@@ -256,13 +262,13 @@
       ic.onclick=()=>{
         const w=document.getElementById(ic.dataset.win);
         if(!w)return;
-        const show = w.style.display!=='flex';
-        w.style.display = show?'flex':'none';
-        ic.classList.toggle('active',show);
+        const open=w.style.display==='flex';
+        w.style.display=open?'none':'flex';
+        ic.classList.toggle('active',!open);
       };
     });
 
-    // Close buttons
+    // Close
     document.querySelectorAll('.close').forEach(btn=>{
       btn.onclick=()=>{
         const w=btn.closest('.window');
@@ -271,7 +277,7 @@
       };
     });
 
-    // Draggable
+    // Drag
     document.querySelectorAll('.window').forEach(win=>{
       const bar=win.querySelector('.titlebar');
       bar.onmousedown=e=>{
@@ -288,7 +294,7 @@
       bar.ondragstart=()=>false;
     });
 
-    // Manual YouTube load
+    // Manual YT load
     function playYT(){
       const id=document.getElementById('yt-id').value.trim();
       document.getElementById('music-iframe').src=
