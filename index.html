@@ -6,95 +6,95 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
   <style>
     /* RESET + BASE */
-    * { box-sizing:border-box; margin:0; padding:0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      width:100%; height:100%; overflow:hidden;
-      background:#0a0a12 url('https://source.unsplash.com/1600x900/?cyberpunk,grid') center/cover no-repeat;
-      font-family:'Press Start 2P',monospace; color:#0ff;
-      cursor:crosshair;
+      width: 100%; height: 100%; overflow: hidden;
+      background: #0a0a12 url('https://source.unsplash.com/1600x900/?cyberpunk,grid') center/cover no-repeat;
+      font-family: 'Press Start 2P', monospace; color: #0ff; cursor: crosshair;
     }
 
     /* ICONS */
-    .desktop { position:relative; width:100%; height:100%; }
+    .desktop { position: relative; width: 100%; height: 100%; }
     .icon {
-      width:72px; text-align:center; float:left; margin:20px;
-      transition:transform .15s; user-select:none; cursor:pointer;
+      width: 72px; text-align: center; float: left; margin: 20px;
+      transition: transform .15s; user-select: none; cursor: pointer;
     }
     .icon img {
-      width:48px; height:48px;
-      filter:drop-shadow(0 0 12px #0ff) saturate(200%);
-      transition:filter .15s,transform .15s;
+      width: 48px; height: 48px;
+      filter: drop-shadow(0 0 12px #0ff) saturate(200%);
+      transition: filter .15s, transform .15s;
     }
-    .icon:hover img, .icon.active img {
-      transform:translateY(-4px) scale(1.1);
-      filter:drop-shadow(0 0 20px #0ff) saturate(250%);
+    .icon:hover img,
+    .icon.active img {
+      transform: translateY(-4px) scale(1.1);
+      filter: drop-shadow(0 0 20px #0ff) saturate(250%);
     }
     .icon label {
-      display:block; margin-top:6px; font-size:10px;
-      text-shadow:0 0 4px rgba(0,0,0,.7);
+      display: block; margin-top: 6px; font-size: 10px;
+      text-shadow: 0 0 4px rgba(0,0,0,.7);
     }
 
     /* DOCK */
     .dock {
-      position:absolute; bottom:48px; left:50%; transform:translateX(-50%);
-      background:rgba(0,0,0,.6); padding:6px 12px; border-radius:16px;
-      display:flex; gap:12px;
+      position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,.6); padding: 6px 12px; border-radius: 16px;
+      display: flex; gap: 12px;
     }
     .dock .icon img {
-      width:32px; height:32px;
-      filter:drop-shadow(0 0 8px #0ff) saturate(200%);
+      width: 32px; height: 32px;
+      filter: drop-shadow(0 0 8px #0ff) saturate(200%);
     }
-    .dock .icon:hover img, .dock .icon.active img {
-      transform:scale(1.2);
-      filter:drop-shadow(0 0 16px #0ff) saturate(250%);
+    .dock .icon:hover img,
+    .dock .icon.active img {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 16px #0ff) saturate(250%);
     }
 
     /* TASKBAR */
     .taskbar {
-      position:absolute; bottom:0; left:0; width:100%; height:40px;
-      background:rgba(0,0,0,.7); display:flex; align-items:center;
-      padding:0 16px; font-size:10px;
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 40px;
+      background: rgba(0,0,0,.7); display: flex; align-items: center;
+      padding: 0 16px; font-size: 10px;
     }
     .taskbar .clock {
-      margin-left:auto; text-shadow:0 0 4px rgba(0,0,0,.7);
+      margin-left: auto; text-shadow: 0 0 4px rgba(0,0,0,.7);
     }
 
     /* MUSIC BUTTON */
     .music-control {
-      position:absolute; bottom:48px; left:16px; z-index:999;
+      position: absolute; bottom: 48px; left: 16px; z-index: 999;
     }
     .music-control button {
-      font-family:'Press Start 2P'; font-size:10px; padding:4px 8px;
-      background:#0ff; color:#000; border:1px solid #0cc;
-      cursor:pointer; box-shadow:0 0 8px #0ff;
+      font-family: 'Press Start 2P'; font-size: 10px; padding: 4px 8px;
+      background: #0ff; color: #000; border: 1px solid #0cc;
+      cursor: pointer; box-shadow: 0 0 8px #0ff;
     }
 
     /* WINDOWS */
     .window {
-      position:absolute; display:none; flex-direction:column;
-      width:400px; height:260px; background:rgba(0,0,16,.95);
-      border:2px solid #0ff; box-shadow:0 0 16px #0ff;
-      overflow:hidden;
+      position: absolute; display: none; flex-direction: column;
+      width: 400px; height: 260px; background: rgba(0,0,16,.95);
+      border: 2px solid #0ff; box-shadow: 0 0 16px #0ff; overflow: hidden;
     }
     .titlebar {
-      background:#0ff; color:#111; padding:6px 10px;
-      display:flex; justify-content:space-between; align-items:center;
-      cursor:move; font-size:10px;
+      background: #0ff; color: #111; padding: 6px 10px;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: move; font-size: 10px;
     }
     .titlebar .close {
-      background:none; border:none; color:#111; font-size:12px;
-      cursor:pointer;
+      background: none; border: none; color: #111; font-size: 12px;
+      cursor: pointer;
     }
     .content {
-      flex:1; padding:8px; overflow:auto;
-      font-size:10px; line-height:1.3;
+      flex: 1; padding: 8px; overflow: auto;
+      font-size: 10px; line-height: 1.3;
     }
     .terminal {
-      background:#000; color:#0f0; font-family:monospace;
-      padding:8px; height:100%; overflow:auto;
+      background: #000; color: #0f0; font-family: monospace;
+      padding: 8px; height: 100%; overflow: auto;
     }
-    iframe { width:100%; height:100%; border:none; background:#fff }
-    input, button { font-family:'Press Start 2P'; font-size:10px; }
+    iframe { width: 100%; height: 100%; border: none; background: #fff; }
+    input, button { font-family: 'Press Start 2P'; font-size: 10px; }
   </style>
 </head>
 <body>
@@ -105,16 +105,16 @@
       <img src="https://img.icons8.com/fluency/48/rocket.png"/><label>PUMP.FUN</label>
     </div>
     <div class="icon" data-win="win-rug">
-      <img src="https://img.icons8.com/fluency/48/security-shield.png"/><label>RUG PULL</label>
+      <img src="https://img.icons8.com/fluency/48/shield.png"/><label>RUG PULL</label>
     </div>
     <div class="icon" data-win="win-meme">
-      <img src="https://img.icons8.com/fluency/48/rolling-on-the-floor-laughing.png"/><label>MEMES</label>
+      <img src="https://img.icons8.com/fluency/48/meme.png"/><label>MEMES</label>
     </div>
     <div class="icon" data-win="win-tweets">
       <img src="https://img.icons8.com/fluency/48/twitter-new.png"/><label>CRYPTO TWTS</label>
     </div>
     <div class="icon" data-win="win-nft">
-      <img src="https://img.icons8.com/fluency/48/non-fungible-token.png"/><label>NFT DROPS</label>
+      <img src="https://img.icons8.com/fluency/48/nft.png"/><label>NFT DROPS</label>
     </div>
     <div class="icon" data-win="win-zoom">
       <img src="https://img.icons8.com/fluency/48/speech-bubble.png"/><label>ZOOMER CHAT</label>
@@ -141,8 +141,8 @@
     <!-- DOCK -->
     <div class="dock">
       <div class="icon" data-win="win-pump"><img src="https://img.icons8.com/fluency/32/rocket.png"/></div>
-      <div class="icon" data-win="win-meme"><img src="https://img.icons8.com/fluency/32/rolling-on-the-floor-laughing.png"/></div>
-      <div class="icon" data-win="win-rug"><img src="https://img.icons8.com/fluency/32/security-shield.png"/></div>
+      <div class="icon" data-win="win-meme"><img src="https://img.icons8.com/fluency/32/meme.png"/></div>
+      <div class="icon" data-win="win-rug"><img src="https://img.icons8.com/fluency/32/shield.png"/></div>
       <div class="icon" data-win="win-whale"><img src="https://img.icons8.com/fluency/32/whale-tail.png"/></div>
       <div class="icon" data-win="win-ticker"><img src="https://img.icons8.com/fluency/32/trending-up.png"/></div>
     </div>
@@ -162,13 +162,11 @@
 
   <!-- WINDOWS -->
 
-  <!-- Pump.fun embedded -->
   <div id="win-pump" class="window" style="top:20px; left:20px;">
     <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
     <div class="content"><iframe src="https://pump.fun"></iframe></div>
   </div>
 
-  <!-- Rug Pull Detector -->
   <div id="win-rug" class="window" style="top:20px; left:450px;">
     <div class="titlebar">RUG PULL DETECTOR <button class="close">✕</button></div>
     <div class="content terminal" id="rug-output">
@@ -180,20 +178,18 @@
     </div>
   </div>
 
-  <!-- Brainrot Memes -->
   <div id="win-meme" class="window" style="top:300px; left:20px;">
     <div class="titlebar">BRAINROT MEMES <button class="close">✕</button></div>
     <div class="content" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
-      <img src="https://i.imgflip.com/1ur9b0.jpg" alt="Distracted Boyfriend"/>
-      <img src="https://i.imgflip.com/1jwhww.jpg" alt="Expanding Brain"/>
-      <img src="https://i.imgflip.com/2kbn1e.jpg" alt="Surprised Pikachu"/>
-      <img src="https://i.imgflip.com/3si4.jpg" alt="Woman Yelling at Cat"/>
-      <img src="https://i.imgflip.com/30b1gx.jpg" alt="Two Buttons"/>
-      <img src="https://i.imgflip.com/1bgw.jpg" alt="Drake Hotline Bling"/>
+      <img src="https://i.imgflip.com/1ur9b0.jpg"/>
+      <img src="https://i.imgflip.com/1jwhww.jpg"/>
+      <img src="https://i.imgflip.com/2kbn1e.jpg"/>
+      <img src="https://i.imgflip.com/3si4.jpg"/>
+      <img src="https://i.imgflip.com/30b1gx.jpg"/>
+      <img src="https://i.imgflip.com/1bgw.jpg"/>
     </div>
   </div>
 
-  <!-- Crypto Tweets -->
   <div id="win-tweets" class="window" style="top:300px; left:450px;">
     <div class="titlebar">LIVE CRYPTO TWEETS <button class="close">✕</button></div>
     <div class="content">
@@ -204,7 +200,6 @@
     </div>
   </div>
 
-  <!-- NFT Drops -->
   <div id="win-nft" class="window" style="top:600px; left:20px;">
     <div class="titlebar">UPCOMING NFT DROPS <button class="close">✕</button></div>
     <div class="content">
@@ -217,7 +212,6 @@
     </div>
   </div>
 
-  <!-- Zoomer Chat -->
   <div id="win-zoom" class="window" style="top:600px; left:450px;">
     <div class="titlebar">ZOOMER CHAT <button class="close">✕</button></div>
     <div class="content">
@@ -228,7 +222,6 @@
     </div>
   </div>
 
-  <!-- Gas Tracker -->
   <div id="win-gas" class="window" style="top:960px; left:20px;">
     <div class="titlebar">ETH GAS TRACKER <button class="close">✕</button></div>
     <div class="content terminal" id="gas-output">
@@ -240,7 +233,6 @@
     </div>
   </div>
 
-  <!-- Whale Watch -->
   <div id="win-whale" class="window" style="top:960px; left:450px;">
     <div class="titlebar">WHALE WATCHER <button class="close">✕</button></div>
     <div class="content">
@@ -254,13 +246,11 @@
     </div>
   </div>
 
-  <!-- DEX Screener -->
   <div id="win-dex" class="window" style="top:1300px; left:20px;">
     <div class="titlebar">DEX SCREENER <button class="close">✕</button></div>
     <div class="content"><iframe src="https://dexscreener.com"></iframe></div>
   </div>
 
-  <!-- FUD Meter -->
   <div id="win-fud" class="window" style="top:1300px; left:450px;">
     <div class="titlebar">FUD METER <button class="close">✕</button></div>
     <div class="content terminal" id="fud-output">
@@ -270,13 +260,11 @@
     </div>
   </div>
 
-  <!-- Ticker -->
   <div id="win-ticker" class="window" style="top:1640px; left:20px;">
     <div class="titlebar">CRYPTO TICKER <button class="close">✕</button></div>
     <div class="content" id="ticker-output"></div>
   </div>
 
-  <!-- Music Player -->
   <div id="win-music" class="window" style="top:1640px; left:450px;">
     <div class="titlebar">MUSIC PLAYER <button class="close">✕</button></div>
     <div class="content">
@@ -290,15 +278,15 @@
 
   <script>
     // Clock
-    setInterval(()=>{
-      const d=new Date(),
-            h=('0'+d.getHours()).slice(-2),
-            m=('0'+d.getMinutes()).slice(-2);
+    setInterval(() => {
+      const d = new Date(),
+            h = ('0' + d.getHours()).slice(-2),
+            m = ('0' + d.getMinutes()).slice(-2);
       document.querySelector('.clock').textContent = `${h}:${m}`;
-    },1000);
+    }, 1000);
 
     // Autoplay background music (fallback button)
-    function startMusic(){
+    function startMusic() {
       document.getElementById('bgmusic').src =
         'https://www.youtube.com/embed/DnxG7Qdghj0?autoplay=1&loop=1&playlist=DnxG7Qdghj0&controls=0';
       document.querySelector('.music-control').style.display = 'none';
@@ -306,100 +294,102 @@
     window.addEventListener('load', startMusic);
 
     // Window toggles
-    document.querySelectorAll('.icon').forEach(ic=>{
-      ic.onclick = ()=>{
+    document.querySelectorAll('.icon').forEach(ic => {
+      ic.onclick = () => {
         const win = document.getElementById(ic.dataset.win);
-        if(!win) return;
-        const open = win.style.display==='flex';
+        if (!win) return;
+        const open = win.style.display === 'flex';
         win.style.display = open ? 'none' : 'flex';
         ic.classList.toggle('active', !open);
-        document.querySelectorAll('.dock .icon')
-          .forEach(d=>{ if(d.dataset.win===ic.dataset.win) d.classList.toggle('active', !open); });
+        document.querySelectorAll('.dock .icon').forEach(d => {
+          if (d.dataset.win === ic.dataset.win) d.classList.toggle('active', !open);
+        });
       };
     });
 
     // Close buttons
-    document.querySelectorAll('.close').forEach(btn=>{
-      btn.onclick = ()=>{
+    document.querySelectorAll('.close').forEach(btn => {
+      btn.onclick = () => {
         const w = btn.closest('.window');
-        w.style.display='none';
-        document.querySelectorAll(`.icon[data-win="${w.id}"]`).forEach(ic=>ic.classList.remove('active'));
+        w.style.display = 'none';
+        document.querySelectorAll(`.icon[data-win="${w.id}"]`)
+                .forEach(ic => ic.classList.remove('active'));
       };
     });
 
     // Draggable windows
-    document.querySelectorAll('.window').forEach(win=>{
+    document.querySelectorAll('.window').forEach(win => {
       const bar = win.querySelector('.titlebar');
-      bar.onmousedown = e=>{
+      bar.onmousedown = e => {
         const r = win.getBoundingClientRect(),
               offX = e.clientX - r.left,
               offY = e.clientY - r.top;
-        function mv(ev){
-          win.style.left = ev.clientX-offX+'px';
-          win.style.top  = ev.clientY-offY+'px';
+        function mv(ev) {
+          win.style.left = ev.clientX - offX + 'px';
+          win.style.top  = ev.clientY - offY + 'px';
         }
         document.addEventListener('mousemove', mv);
-        document.addEventListener('mouseup', ()=>document.removeEventListener('mousemove', mv), { once:true });
+        document.addEventListener('mouseup', () => document.removeEventListener('mousemove', mv), { once: true });
       };
-      bar.ondragstart = ()=>false;
+      bar.ondragstart = () => false;
     });
 
     // Rug pull re-scan
     const rugOut = document.getElementById('rug-output');
-    document.querySelector('[data-win="win-rug"]').onclick=()=>{
-      setTimeout(()=>{
-        const ok = Math.random()>0.4;
+    document.querySelector('[data-win="win-rug"]').onclick = () => {
+      setTimeout(() => {
+        const ok = Math.random() > 0.4;
         rugOut.innerHTML =
           '<p>> scanning liquidity…</p>' +
           '<p>> scanning dev wallet…</p>' +
-          `<p>> RESULT: <strong>${ok?'SAFE ✅':'RUG 🚨'}</strong></p>` +
+          `<p>> RESULT: <strong>${ok ? 'SAFE ✅' : 'RUG 🚨'}</strong></p>` +
           '<p>> last rug pull: <em>$MELTDOWN</em></p>' +
-          '<p><em>click to re-scan</em></p>';
-      },400);
+          '<p><em>click icon to re-scan</em></p>';
+      }, 400);
     };
 
-    // Gas randomizer
+    // Gas track randomize
     const gasOut = document.getElementById('gas-output');
-    document.querySelector('[data-win="win-gas"]').onclick=()=>{
+    document.querySelector('[data-win="win-gas"]').onclick = () => {
       gasOut.innerHTML =
-        `<p>> fast: <strong>${60+Math.floor(Math.random()*100)} GWEI</strong></p>` +
-        `<p>> standard: <strong>${40+Math.floor(Math.random()*60)} GWEI</strong></p>` +
-        `<p>> slow: <strong>${10+Math.floor(Math.random()*40)} GWEI</strong></p>` +
-        `<p>> avg tx time: <strong>${10+Math.floor(Math.random()*50)}s</strong></p>` +
+        `<p>> fast: <strong>${60 + Math.floor(Math.random() * 100)} GWEI</strong></p>` +
+        `<p>> standard: <strong>${40 + Math.floor(Math.random() * 60)} GWEI</strong></p>` +
+        `<p>> slow: <strong>${10 + Math.floor(Math.random() * 40)} GWEI</strong></p>` +
+        `<p>> avg tx time: <strong>${10 + Math.floor(Math.random() * 50)}s</strong></p>` +
         '<p><em>click icon to randomize</em></p>';
     };
 
     // FUD meter
     const fudOut = document.getElementById('fud-output');
-    document.querySelector('[data-win="win-fud"]').onclick=()=>{
-      const fud = Math.floor(Math.random()*100),
-            hype= Math.floor(Math.random()*100);
+    document.querySelector('[data-win="win-fud"]').onclick = () => {
+      const f = Math.floor(Math.random() * 100),
+            h = Math.floor(Math.random() * 100);
       fudOut.innerHTML =
-        `<p>> FUD LEVEL: ${fud}%</p>` +
-        `<p>> HYPE SCORE: ${hype}/100</p>` +
+        `<p>> FUD LEVEL: ${f}%</p>` +
+        `<p>> HYPE SCORE: ${h}/100</p>` +
         '<p><em>click icon to refresh</em></p>';
     };
 
     // Ticker
-    function updateTicker(){
-      const out=document.getElementById('ticker-output');
-      out.innerHTML='';
-      ['DOGE','SHIB','FLOKI'].forEach(sym=>{
-        const p=document.createElement('p'),
-              price=(Math.random()*(sym==='DOGE'?0.5:0.00002)+ (sym==='DOGE'?0.2:0.00002)).toFixed(6),
-              ch=(Math.random()*100-50).toFixed(1);
-        p.textContent=`${sym}: $${price} (${ch}%)`;
+    function updateTicker() {
+      const out = document.getElementById('ticker-output');
+      out.innerHTML = '';
+      ['DOGE','SHIB','FLOKI'].forEach(sym => {
+        const p = document.createElement('p'),
+              price = (Math.random() * (sym==='DOGE'?0.5:0.00002) + (sym==='DOGE'?0.2:0.00002)).toFixed(6),
+              ch    = (Math.random() * 100 - 50).toFixed(1);
+        p.textContent = `${sym}: $${price} (${ch}%)`;
         out.appendChild(p);
       });
-      const foot=document.createElement('p');
-      foot.innerHTML='<em>updates every 3s</em>';
+      const foot = document.createElement('p');
+      foot.innerHTML = '<em>updates every 3s</em>';
       out.appendChild(foot);
     }
-    updateTicker(); setInterval(updateTicker,3000);
+    updateTicker(); setInterval(updateTicker, 3000);
 
-    // Music player loader
-    function playYT(){
-      const id=document.getElementById('yt-id').value.trim();
+    // Music player load
+    function playYT() {
+      const id = document.getElementById('yt-id').value.trim();
       document.getElementById('music-iframe').src =
         `https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&controls=1`;
     }
