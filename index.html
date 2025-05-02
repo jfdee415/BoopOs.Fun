@@ -22,13 +22,14 @@
     }
     .icon img {
       width: 48px; height: 48px;
-      filter: drop-shadow(0 0 8px #0ff);
+      /* full-color, vibrant icons */
+      filter: drop-shadow(0 0 12px #0ff) saturate(200%);
       transition: filter .15s, transform .15s;
     }
     .icon:hover img,
     .icon.active img {
       transform: translateY(-4px) scale(1.1);
-      filter: drop-shadow(0 0 16px #0ff);
+      filter: drop-shadow(0 0 20px #0ff) saturate(250%);
     }
     .icon label {
       display: block; margin-top: 6px; font-size: 10px;
@@ -43,13 +44,13 @@
     }
     .dock .icon img {
       width: 32px; height: 32px;
-      filter: drop-shadow(0 0 6px #0ff);
-      transition: transform .15s;
+      filter: drop-shadow(0 0 8px #0ff) saturate(200%);
+      transition: filter .15s, transform .15s;
     }
     .dock .icon:hover img,
     .dock .icon.active img {
       transform: scale(1.2);
-      filter: drop-shadow(0 0 12px #0ff) saturate(200%);
+      filter: drop-shadow(0 0 16px #0ff) saturate(250%);
     }
 
     /* TASKBAR */
@@ -100,19 +101,55 @@
 </head>
 <body>
   <div class="desktop">
-    <!-- Core Apps -->
-    <div class="icon" data-win="win-pump"><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png"/><label>PUMP.FUN</label></div>
-    <div class="icon" data-win="win-rug"><img src="https://cdn-icons-png.flaticon.com/512/633/633759.png"/><label>RUG PULL</label></div>
-    <div class="icon" data-win="win-meme"><img src="https://cdn-icons-png.flaticon.com/512/4962/4962871.png"/><label>MEMES</label></div>
-    <div class="icon" data-win="win-tweets"><img src="https://cdn-icons-png.flaticon.com/512/145/145812.png"/><label>CRYPTO TWTS</label></div>
-    <div class="icon" data-win="win-nft"><img src="https://cdn-icons-png.flaticon.com/512/1260/1260995.png"/><label>NFT DROPS</label></div>
-    <div class="icon" data-win="win-zoom"><img src="https://cdn-icons-png.flaticon.com/512/4140/4140046.png"/><label>ZOOMER CHAT</label></div>
-    <div class="icon" data-win="win-gas"><img src="https://cdn-icons-png.flaticon.com/512/809/809257.png"/><label>GAS TRACKER</label></div>
-    <div class="icon" data-win="win-whale"><img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png"/><label>WHALE WATCH</label></div>
-    <div class="icon" data-win="win-dex"><img src="https://cdn-icons-png.flaticon.com/512/185/185661.png"/><label>DEX SCREENER</label></div>
-    <div class="icon" data-win="win-fud"><img src="https://cdn-icons-png.flaticon.com/512/5269/5269603.png"/><label>FUD METER</label></div>
-    <div class="icon" data-win="win-ticker"><img src="https://cdn-icons-png.flaticon.com/512/942/942751.png"/><label>TICKER</label></div>
-    <div class="icon" data-win="win-music"><img src="https://cdn-icons-png.flaticon.com/512/727/727210.png"/><label>MUSIC</label></div>
+    <!-- Brainrot Apps -->
+    <div class="icon" data-win="win-pump">
+      <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png"/>
+      <label>PUMP.FUN</label>
+    </div>
+    <div class="icon" data-win="win-rug">
+      <img src="https://cdn-icons-png.flaticon.com/512/633/633759.png"/>
+      <label>RUG PULL</label>
+    </div>
+    <div class="icon" data-win="win-meme">
+      <img src="https://cdn-icons-png.flaticon.com/512/4962/4962871.png"/>
+      <label>MEMES</label>
+    </div>
+    <div class="icon" data-win="win-tweets">
+      <img src="https://cdn-icons-png.flaticon.com/512/145/145812.png"/>
+      <label>CRYPTO TWTS</label>
+    </div>
+    <div class="icon" data-win="win-nft">
+      <img src="https://cdn-icons-png.flaticon.com/512/1260/1260995.png"/>
+      <label>NFT DROPS</label>
+    </div>
+    <div class="icon" data-win="win-zoom">
+      <img src="https://cdn-icons-png.flaticon.com/512/4140/4140046.png"/>
+      <label>ZOOMER CHAT</label>
+    </div>
+    <div class="icon" data-win="win-gas">
+      <img src="https://cdn-icons-png.flaticon.com/512/809/809257.png"/>
+      <label>GAS TRACKER</label>
+    </div>
+    <div class="icon" data-win="win-whale">
+      <img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png"/>
+      <label>WHALE WATCH</label>
+    </div>
+    <div class="icon" data-win="win-dex">
+      <img src="https://cdn-icons-png.flaticon.com/512/185/185661.png"/>
+      <label>DEX SCREENER</label>
+    </div>
+    <div class="icon" data-win="win-fud">
+      <img src="https://cdn-icons-png.flaticon.com/512/5269/5269603.png"/>
+      <label>FUD METER</label>
+    </div>
+    <div class="icon" data-win="win-ticker">
+      <img src="https://cdn-icons-png.flaticon.com/512/942/942751.png"/>
+      <label>TICKER</label>
+    </div>
+    <div class="icon" data-win="win-music">
+      <img src="https://cdn-icons-png.flaticon.com/512/727/727210.png"/>
+      <label>MUSIC</label>
+    </div>
 
     <!-- Dock -->
     <div class="dock">
@@ -338,7 +375,7 @@
       let out = document.getElementById('ticker-output');
       out.innerHTML = '';
       ['DOGE','SHIB','FLOKI'].forEach(sym=>{
-        let price = (Math.random()* (sym==='DOGE'?0.5:0.00002) + (sym==='DOGE'?0.2:0.00002)).toFixed(6),
+        let price = (Math.random()*(sym==='DOGE'?0.5:0.00002)+(sym==='DOGE'?0.2:0.00002)).toFixed(6),
             ch    = (Math.random()*100-50).toFixed(1);
         let p = document.createElement('p');
         p.textContent = `${sym}: $${price} (${ch}%)`;
