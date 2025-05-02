@@ -56,7 +56,8 @@
     .window {
       position:absolute; display:none; flex-direction:column;
       width:400px; height:260px; background:rgba(0,0,16,.95);
-      border:2px solid #0ff; box-shadow:0 0 16px #0ff; overflow:hidden;
+      border:2px solid #0ff; box-shadow:0 0 16px #0ff;
+      overflow:hidden; z-index:1000; /* bring above dock/taskbar */
     }
     .titlebar {
       background:#0ff; color:#111; padding:6px 10px;
@@ -116,25 +117,26 @@
   <div class="music-control">
     <button onclick="startMusic()">🎵 Play Music</button>
   </div>
-  <iframe id="bgmusic" allow="autoplay" style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
+  <iframe id="bgmusic" allow="autoplay"
+          style="position:absolute;width:0;height:0;opacity:0;border:0;"></iframe>
 
   <!-- WINDOWS -->
-  <div id="win-pump" class="window" style="top:20px;left:20px">
+  <div id="win-pump" class="window" style="top:20px; left:20px;">
     <div class="titlebar">PUMP.FUN <button class="close">✕</button></div>
     <div class="content"><img src="images/pump.jpg" alt="Pump.fun"/></div>
   </div>
 
-  <div id="win-rug" class="window" style="top:20px;left:450px">
+  <div id="win-rug" class="window" style="top:20px; left:450px;">
     <div class="titlebar">RUG PULL <button class="close">✕</button></div>
     <div class="content"><img src="images/rugpull.jpg" alt="Rug Pull"/></div>
   </div>
 
-  <div id="win-meme" class="window" style="top:300px;left:20px">
+  <div id="win-meme" class="window" style="top:300px; left:20px;">
     <div class="titlebar">BRAINROT MEMES <button class="close">✕</button></div>
     <div class="content"><img src="images/brainrot.jpg" alt="Brainrot Meme"/></div>
   </div>
 
-  <div id="win-tweets" class="window" style="top:300px;left:450px">
+  <div id="win-tweets" class="window" style="top:300px; left:450px;">
     <div class="titlebar">LIVE CRYPTO TWEETS <button class="close">✕</button></div>
     <div class="content terminal">
       <p>“$PEPE just pumped 300% 🤯” – @MoonChad</p>
@@ -144,7 +146,7 @@
     </div>
   </div>
 
-  <div id="win-nft" class="window" style="top:600px;left:20px">
+  <div id="win-nft" class="window" style="top:600px; left:20px;">
     <div class="titlebar">UPCOMING NFT DROPS <button class="close">✕</button></div>
     <div class="content">
       <ul>
@@ -156,7 +158,7 @@
     </div>
   </div>
 
-  <div id="win-zoom" class="window" style="top:600px;left:450px">
+  <div id="win-zoom" class="window" style="top:600px; left:450px;">
     <div class="titlebar">ZOOMER CHAT <button class="close">✕</button></div>
     <div class="content">
       <p><strong>You:</strong> YOLO on $PUMP?</p>
@@ -166,12 +168,12 @@
     </div>
   </div>
 
-  <div id="win-gas" class="window" style="top:960px;left:20px">
+  <div id="win-gas" class="window" style="top:920px; left:20px;">
     <div class="titlebar">GAS TRACKER <button class="close">✕</button></div>
     <div class="content"><img src="images/gastracker.jpg" alt="Gas Prices"/></div>
   </div>
 
-  <div id="win-whale" class="window" style="top:960px;left:450px">
+  <div id="win-whale" class="window" style="top:920px; left:450px;">
     <div class="titlebar">WHALE WATCH <button class="close">✕</button></div>
     <div class="content">
       <p>🚨 WALLET 0xAB…F320 moved:</p>
@@ -184,22 +186,22 @@
     </div>
   </div>
 
-  <div id="win-dex" class="window" style="top:1300px;left:20px">
+  <div id="win-dex" class="window" style="top:1240px; left:20px;">
     <div class="titlebar">DEX SCREENER <button class="close">✕</button></div>
     <div class="content"><img src="images/dex.jpg" alt="DEX Screener"/></div>
   </div>
 
-  <div id="win-fud" class="window" style="top:1300px;left:450px">
+  <div id="win-fud" class="window" style="top:1240px; left:450px;">
     <div class="titlebar">FUD METER <button class="close">✕</button></div>
     <div class="content"><img src="images/fud.jpg" alt="FUD Meter"/></div>
   </div>
 
-  <div id="win-ticker" class="window" style="top:1640px;left:20px">
+  <div id="win-ticker" class="window" style="top:1240px; left:880px;">
     <div class="titlebar">TICKER <button class="close">✕</button></div>
     <div class="content"><img src="images/ticker.jpg" alt="Ticker"/></div>
   </div>
 
-  <div id="win-music" class="window" style="top:1640px;left:450px">
+  <div id="win-music" class="window" style="top:1640px; left:450px;">
     <div class="titlebar">MUSIC PLAYER <button class="close">✕</button></div>
     <div class="content">
       <p>Enter YouTube ID &amp; click Load:</p>
@@ -211,7 +213,7 @@
   </div>
 
   <script>
-    // Clock
+    // clock
     setInterval(()=>{
       const d=new Date(),
             h=('0'+d.getHours()).slice(-2),
@@ -219,7 +221,7 @@
       document.querySelector('.clock').textContent=`${h}:${m}`;
     },1000);
 
-    // Autoplay music
+    // autoplay music
     function startMusic(){
       document.getElementById('bgmusic').src=
         'https://www.youtube.com/embed/DnxG7Qdghj0?autoplay=1&loop=1&playlist=DnxG7Qdghj0&controls=0';
@@ -228,27 +230,27 @@
     window.addEventListener('load',startMusic);
     document.body.addEventListener('click',startMusic,{once:true});
 
-    // Toggle windows on icon click
+    // toggle windows
     document.querySelectorAll('.icon').forEach(ic=>{
       ic.onclick=()=>{
         const win = document.getElementById(ic.dataset.win);
-        if (!win) return console.warn('No window for', ic.dataset.win);
+        if(!win) return;
         const show = win.style.display!=='flex';
         win.style.display = show?'flex':'none';
         ic.classList.toggle('active', show);
       };
     });
 
-    // Close buttons
-    document.querySelectorAll('.close').forEach(btn=>{
-      btn.onclick=()=>{
-        const w=btn.closest('.window');
+    // close
+    document.querySelectorAll('.close').forEach(b=>{
+      b.onclick=()=>{
+        const w=b.closest('.window');
         w.style.display='none';
         document.querySelector(`.icon[data-win="${w.id}"]`).classList.remove('active');
       };
     });
 
-    // Dragging
+    // drag
     document.querySelectorAll('.window').forEach(win=>{
       const bar=win.querySelector('.titlebar');
       bar.onmousedown=e=>{
@@ -264,7 +266,7 @@
       bar.ondragstart=()=>false;
     });
 
-    // Manual YouTube load
+    // manual YT
     function playYT(){
       const id=document.getElementById('yt-id').value.trim();
       document.getElementById('music-iframe').src=
