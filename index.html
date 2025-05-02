@@ -2,141 +2,244 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SimpleFakeDesktop</title>
+  <title>BrainrotOS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  >
   <style>
-    /* FULLSCREEN & RESET */
+    /* RESET & FULLSCREEN */
+    * { box-sizing: border-box; }
     html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
       overflow: hidden;
-      font-family: sans-serif;
+      font-family: 'Press Start 2P', monospace;
+      cursor: crosshair;
+      background: #111;
+      color: #0ff;
     }
 
-    /* DESKTOP BACKGROUND */
+    /* NEON ANIMATED BACKGROUND */
     .desktop {
       position: relative;
-      width: 100%;
-      height: 100%;
-      background: #2b2b2b; /* solid dark gray */
-      background-size: cover;
+      width: 100%; height: 100%;
+      background: linear-gradient(45deg, #ff00c8, #00fff0, #fffb00, #ff0054);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite, hue 20s linear infinite;
+    }
+    @keyframes gradient {
+      0% { background-position:   0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position:   0% 50%; }
+    }
+    @keyframes hue {
+      0%   { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
     }
 
     /* ICONS */
     .icon {
-      width: 80px;
-      text-align: center;
-      color: #ddd;
-      margin: 16px;
-      cursor: pointer;
-      float: left;
+      width: 80px; text-align: center;
+      float: left; margin: 16px;
       user-select: none;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50%     { transform: scale(1.1); }
     }
     .icon img {
-      width: 48px;
-      height: 48px;
-      display: block;
-      margin: 0 auto;
+      width: 48px; height: 48px;
+      filter: drop-shadow(0 0 4px #0ff);
     }
     .icon div {
-      margin-top: 4px;
-      font-size: 14px;
+      margin-top: 6px;
+      font-size: 10px;
     }
 
     /* TASKBAR */
     .taskbar {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 32px;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      line-height: 32px;
-      padding-left: 12px;
-      box-sizing: border-box;
+      bottom: 0; left: 0;
+      width: 100%; height: 32px;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center;
+      padding: 0 16px;
+      font-size: 10px;
+    }
+    .taskbar .clock {
+      margin-left: auto;
     }
 
     /* WINDOWS */
     .window {
       position: absolute;
-      width: 300px;
-      height: 200px;
-      background: #fff;
-      border: 1px solid #444;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      width: 360px; height: 260px;
+      background: rgba(0,0,0,0.9);
+      border: 2px solid #0ff;
+      box-shadow: 0 0 12px #0ff;
       display: none;
       flex-direction: column;
     }
     .window .titlebar {
-      background: #444;
-      color: #fff;
-      padding: 6px;
-      cursor: move;
-      user-select: none;
-      font-size: 14px;
+      background: #0ff; color: #111;
+      padding: 8px;
+      display: flex; justify-content: space-between;
+      align-items: center;
+      cursor: move; user-select: none;
+      font-size: 10px;
+    }
+    .window .titlebar .close {
+      background: none; border: none;
+      color: #111; font-family: inherit;
+      cursor: pointer; font-size: 12px;
     }
     .window .content {
-      padding: 8px;
-      flex: 1;
-      overflow: auto;
+      flex: 1; padding: 10px;
+      overflow: auto; font-size: 10px;
+      color: #0ff;
     }
   </style>
 </head>
 <body>
+
+  <!-- SOUND EFFECTS -->
+  <audio id="sound1" src="https://orangefreesounds.com/wp-content/uploads/2022/07/Boop-sound-effect.mp3"></audio>
+  <audio id="sound2" src="https://orangefreesounds.com/wp-content/uploads/2021/07/Pop-sound-effect.mp3"></audio>
+  <audio id="sound3" src="https://orangefreesounds.com/wp-content/uploads/2021/03/Short-yeet-sound.mp3"></audio>
+
+  <!-- DESKTOP -->
   <div class="desktop">
-    <!-- Icon 1 -->
-    <div class="icon" data-window="win1">
-      <img src="https://img.icons8.com/fluency/48/000000/console.png" alt="Terminal">
-      <div>Terminal</div>
+    <div class="icon" data-win="win1">
+      <img src="https://img.icons8.com/fluency/48/000000/terminal.png" alt="Terminal">
+      <div>TERMINAL</div>
     </div>
-    <!-- Icon 2 -->
-    <div class="icon" data-window="win2">
-      <img src="https://img.icons8.com/fluency/48/000000/globe.png" alt="Browser">
-      <div>Browser</div>
+    <div class="icon" data-win="win2">
+      <img src="https://img.icons8.com/fluency/48/000000/google-chrome.png" alt="Browser">
+      <div>BROWSER</div>
+    </div>
+    <div class="icon" data-win="win3">
+      <img src="https://img.icons8.com/fluency/48/000000/pictures-folder.png" alt="Meme Vault">
+      <div>MEME VAULT</div>
+    </div>
+    <div class="icon" data-win="win4">
+      <img src="https://img.icons8.com/fluency/48/000000/bitcoin.png" alt="Crypto Ticker">
+      <div>CRYPTO</div>
+    </div>
+    <div class="icon" data-win="win5">
+      <img src="https://img.icons8.com/fluency/48/000000/brain.png" alt="Brainrot Chat">
+      <div>BRAINROT</div>
     </div>
   </div>
 
-  <div class="taskbar">SimpleFakeDesktop</div>
+  <!-- TASKBAR -->
+  <div class="taskbar">
+    BrainrotOS  
+    <div class="clock">00:00</div>
+  </div>
 
-  <!-- Window 1 -->
-  <div id="win1" class="window" style="top: 50px; left: 50px;">
-    <div class="titlebar">Terminal</div>
+  <!-- WINDOWS -->
+  <div id="win1" class="window" style="top: 60px; left: 60px;">
+    <div class="titlebar">
+      Terminal  
+      <button class="close">✕</button>
+    </div>
     <div class="content">
-      <pre>> echo "Hello, world!"</pre>
+      <pre>> echo "galactic brainrot..."</pre>
     </div>
   </div>
 
-  <!-- Window 2 -->
-  <div id="win2" class="window" style="top: 100px; left: 150px;">
-    <div class="titlebar">Browser</div>
+  <div id="win2" class="window" style="top: 100px; left: 140px;">
+    <div class="titlebar">
+      Browser  
+      <button class="close">✕</button>
+    </div>
     <div class="content">
-      <p>This is a fake browser window.</p>
+      <p>This is a fake browser. Go wild.</p>
+    </div>
+  </div>
+
+  <div id="win3" class="window" style="top: 140px; left: 220px;">
+    <div class="titlebar">
+      Meme Vault  
+      <button class="close">✕</button>
+    </div>
+    <div class="content">
+      <p>📸 Imagine your dankest memes, all in one place.</p>
+    </div>
+  </div>
+
+  <div id="win4" class="window" style="top: 180px; left: 300px;">
+    <div class="titlebar">
+      Crypto Ticker  
+      <button class="close">✕</button>
+    </div>
+    <div class="content">
+      <p>BTC: $<span id="btc">--</span></p>
+      <p>ETH: $<span id="eth">--</span></p>
+    </div>
+  </div>
+
+  <div id="win5" class="window" style="top: 220px; left: 380px;">
+    <div class="titlebar">
+      Brainrot Chat  
+      <button class="close">✕</button>
+    </div>
+    <div class="content">
+      <p>Hey, what's on your mind? 🤯</p>
     </div>
   </div>
 
   <script>
-    // Toggle windows on double-click
-    document.querySelectorAll('.icon').forEach(icon => {
-      icon.addEventListener('dblclick', () => {
-        const win = document.getElementById(icon.dataset.window);
-        win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+    // CLOCK
+    function updateClock(){
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2,'0');
+      const m = String(now.getMinutes()).padStart(2,'0');
+      document.querySelector('.clock').textContent = h + ':' + m;
+    }
+    setInterval(updateClock,1000);
+    updateClock();
+
+    // SOUNDS ARRAY
+    const sounds = [
+      document.getElementById('sound1'),
+      document.getElementById('sound2'),
+      document.getElementById('sound3')
+    ];
+
+    // ICON DOUBLE-CLICK TO OPEN
+    document.querySelectorAll('.icon').forEach(ic => {
+      ic.addEventListener('dblclick', () => {
+        const win = document.getElementById(ic.dataset.win);
+        const showing = getComputedStyle(win).display === 'flex';
+        win.style.display = showing ? 'none' : 'flex';
+        if (!showing) {
+          // play random sound
+          const s = sounds[Math.floor(Math.random() * sounds.length)];
+          s.currentTime = 0; s.play();
+        }
       });
     });
 
-    // Make windows draggable
+    // CLOSE BUTTON
+    document.querySelectorAll('.close').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.window').style.display = 'none';
+      });
+    });
+
+    // DRAGGABLE WINDOWS
     document.querySelectorAll('.window').forEach(win => {
       const bar = win.querySelector('.titlebar');
       bar.addEventListener('mousedown', e => {
         let shiftX = e.clientX - win.getBoundingClientRect().left;
         let shiftY = e.clientY - win.getBoundingClientRect().top;
-
         function onMouseMove(e) {
           win.style.left = e.clientX - shiftX + 'px';
-          win.style.top = e.clientY - shiftY + 'px';
+          win.style.top  = e.clientY - shiftY + 'px';
         }
-
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', () => {
           document.removeEventListener('mousemove', onMouseMove);
@@ -144,6 +247,12 @@
       });
       bar.ondragstart = () => false;
     });
+
+    // FAKE CRYPTO PRICES (random)
+    setInterval(() => {
+      document.getElementById('btc').textContent = (30000 + Math.random()*5000).toFixed(2);
+      document.getElementById('eth').textContent = (2000 + Math.random()*200).toFixed(2);
+    }, 3000);
   </script>
 </body>
 </html>
