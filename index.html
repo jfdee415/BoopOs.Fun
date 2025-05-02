@@ -2,320 +2,268 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BrainrotOS Pro</title>
+  <title>BrainrotOS Ultimate</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Roboto+Mono&display=swap"
     rel="stylesheet"
   />
   <style>
-    /* RESET & BASE */
+    :root {
+      --bg: #111222;
+      --accent: #3a8fd5;
+      --fg: #ccddee;
+      --win-bg: #1e1e2f;
+      --term-bg: #0d0d12;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      width: 100%; height: 100%; overflow: hidden;
-      background: #111222;
-      font-family: 'Inter', sans-serif;
-      color: #ccddee;
-      cursor: default;
+      width:100%; height:100%; overflow:hidden;
+      background: var(--bg); font-family:'Inter',sans-serif; color:var(--fg);
     }
-
-    /* DESKTOP LAYOUT */
     .desktop {
-      position: relative;
-      width: 100%; height: 100%;
+      position:relative; width:100%; height:100%;
       padding: 40px 60px 80px 60px;
     }
     .icon {
-      width: 80px; text-align: center;
-      margin: 0 20px 20px 0; display: inline-block;
-      user-select: none;
-      transition: transform .15s, filter .15s;
+      display:inline-block; width:80px; text-align:center; margin:0 20px 20px 0;
+      cursor:pointer; transition:.15s;
     }
     .icon img {
-      width: 48px; height: 48px;
-      filter: grayscale(30%);
-      transition: filter .15s;
-    }
-    .icon:hover {
-      transform: translateY(-4px);
+      width:48px; height:48px; filter:grayscale(30%);
+      transition: filter .15s, transform .15s;
     }
     .icon:hover img {
-      filter: none;
+      filter:none; transform:translateY(-4px);
     }
     .icon label {
-      display: block;
-      margin-top: 6px;
-      font-size: 12px;
-      font-weight: 500;
+      display:block; margin-top:6px; font-size:12px; font-weight:500;
     }
 
-    /* DOCK */
+    /* Start Menu */
+    .start-button {
+      position:absolute; bottom:0; left:0; width:60px; height:40px;
+      background: var(--accent); display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+    }
+    .start-menu {
+      position:absolute; bottom:40px; left:0; width:200px;
+      background: var(--win-bg); border:2px solid var(--accent);
+      box-shadow:0 4px 12px rgba(0,0,0,0.7); display:none; flex-direction:column;
+    }
+    .start-menu .item {
+      padding:10px; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.1);
+      cursor:pointer;
+    }
+    .start-menu .item:hover { background: rgba(255,255,255,0.1); }
+
+    /* Dock */
     .dock {
-      position: absolute;
-      bottom: 60px; left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.6);
-      padding: 8px 16px;
-      border-radius: 12px;
-      display: flex; gap: 16px;
-    }
-    .dock .icon img {
-      width: 32px; height: 32px;
-      filter: grayscale(50%);
-    }
-    .dock .icon:hover img {
-      filter: none;
-      transform: scale(1.3);
+      position:absolute; bottom:60px; left:50%; transform:translateX(-50%);
+      background:rgba(0,0,0,0.6); padding:8px 16px; border-radius:12px;
+      display:flex; gap:16px;
     }
 
-    /* TASKBAR */
+    /* Taskbar + tray */
     .taskbar {
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 100%; height: 40px;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #ccddee;
+      position:absolute; bottom:0; left:0; width:100%; height:40px;
+      background:rgba(0,0,0,0.8); display:flex; align-items:center; padding:0 20px;
+      font-size:12px; font-weight:600;
     }
-    .taskbar .clock {
-      margin-left: auto;
-      font-family: 'Roboto Mono', monospace;
+    .tray {
+      margin-left:auto; display:flex; gap:12px; align-items:center;
     }
+    .tray img { width:20px; height:20px; filter:invert(80%); }
+    .clock { font-family:'Roboto Mono',monospace; }
 
-    /* WINDOWS */
+    /* Windows */
     .window {
-      position: absolute;
-      display: none;
-      flex-direction: column;
-      width: 70vw;
-      height: 70vh;
-      max-width: 800px;
-      max-height: 600px;
-      background: #1e1e2f;
-      border: 2px solid #3a8fd5;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-      overflow: hidden;
+      position:absolute; display:none; flex-direction:column;
+      width:70vw; height:70vh; max-width:800px; max-height:600px;
+      background:var(--win-bg); border:2px solid var(--accent);
+      box-shadow:0 4px 12px rgba(0,0,0,0.7); overflow:hidden;
     }
-    .window .titlebar {
-      background: #3a8fd5;
-      color: #fff;
-      padding: 10px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      cursor: move;
-      user-select: none;
+    .titlebar {
+      background:var(--accent); color:#fff; padding:10px 14px;
+      display:flex; justify-content:space-between; align-items:center;
+      cursor:move; user-select:none; font-size:13px;
     }
-    .window .titlebar .close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: color .15s;
+    .titlebar .close {
+      background:none; border:none; color:#fff; font-size:16px; cursor:pointer;
+      transition:color .15s;
     }
-    .window .titlebar .close:hover {
-      color: #ff5566;
-    }
-    .window .content {
-      flex: 1;
-      padding: 16px;
-      overflow: auto;
-      font-size: 14px;
-      line-height: 1.5;
-      color: #ddeeff;
+    .titlebar .close:hover { color:#ff5566; }
+    .content {
+      flex:1; padding:16px; overflow:auto; font-size:14px; line-height:1.5;
     }
     .terminal {
-      background: #0d0d12;
-      color: #66ff66;
-      font-family: 'Roboto Mono', monospace;
-      height: 100%;
-      padding: 12px;
-      overflow-y: auto;
-      font-size: 13px;
+      background:var(--term-bg); color:#66ff66; font-family:'Roboto Mono',monospace;
+      height:100%; padding:12px; overflow-y:auto; font-size:13px;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: #fff;
-    }
+    iframe { width:100%; height:100%; border:none; background:#fff; }
+
+    /* System Monitor bars */
+    .bar { background:#333; margin:8px 0; height:16px; border-radius:4px; overflow:hidden; }
+    .bar-inner { height:100%; background:var(--accent); width:0; transition:width .5s; }
   </style>
 </head>
 <body>
 
   <div class="desktop">
-    <!-- Desktop Icons -->
-    <div class="icon" data-win="win-pump">
-      <img src="https://img.icons8.com/fluency/48/000000/rocket.png" alt="" />
-      <label>PUMP.FUN</label>
-    </div>
-    <div class="icon" data-win="win-rug">
-      <img src="https://img.icons8.com/fluency/48/000000/warning-shield.png" alt="" />
-      <label>RUG DETECTOR</label>
-    </div>
-    <div class="icon" data-win="win-meme">
-      <img src="https://img.icons8.com/fluency/48/000000/bitcoin.png" alt="" />
-      <label>MEME COINS</label>
-    </div>
-    <div class="icon" data-win="win-tweets">
-      <img src="https://img.icons8.com/fluency/48/000000/twitter.png" alt="" />
-      <label>CRYPTO TWEETS</label>
-    </div>
-    <div class="icon" data-win="win-term">
-      <img src="https://img.icons8.com/fluency/48/000000/console.png" alt="" />
-      <label>TERMINAL</label>
-    </div>
+    <!-- Desktop icons -->
+    <div class="icon" data-win="win-explorer"><img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png"/><label>EXPLORER</label></div>
+    <div class="icon" data-win="win-notes"><img src="https://img.icons8.com/fluency/48/000000/sticky-note.png"/><label>NOTES</label></div>
+    <div class="icon" data-win="win-gallery"><img src="https://img.icons8.com/fluency/48/000000/picture.png"/><label>MEME GALLERY</label></div>
+    <div class="icon" data-win="win-settings"><img src="https://img.icons8.com/fluency/48/000000/settings.png"/><label>SETTINGS</label></div>
+    <div class="icon" data-win="win-monitor"><img src="https://img.icons8.com/fluency/48/000000/combo-chart.png"/><label>MONITOR</label></div>
 
     <!-- Dock -->
     <div class="dock">
-      <div class="icon" data-win="win-browser">
-        <img src="https://img.icons8.com/fluency/48/000000/google-chrome.png" alt="" />
-      </div>
-      <div class="icon" data-win="win-pump">
-        <img src="https://img.icons8.com/fluency/48/000000/rocket.png" alt="" />
-      </div>
-      <div class="icon" data-win="win-meme">
-        <img src="https://img.icons8.com/fluency/48/000000/bitcoin.png" alt="" />
-      </div>
-      <div class="icon" data-win="win-tweets">
-        <img src="https://img.icons8.com/fluency/48/000000/twitter.png" alt="" />
-      </div>
+      <div class="icon" data-win="win-explorer"><img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png"/></div>
+      <div class="icon" data-win="win-gallery"><img src="https://img.icons8.com/fluency/48/000000/picture.png"/></div>
+      <div class="icon" data-win="win-monitor"><img src="https://img.icons8.com/fluency/48/000000/combo-chart.png"/></div>
     </div>
   </div>
 
-  <!-- Taskbar -->
+  <!-- Start + Taskbar -->
+  <div class="start-button">☰</div>
+  <div class="start-menu">
+    <div class="item" data-win="win-explorer">Explorer</div>
+    <div class="item" data-win="win-notes">Sticky Notes</div>
+    <div class="item" data-win="win-gallery">Meme Gallery</div>
+    <div class="item" data-win="win-settings">Settings</div>
+    <div class="item" data-win="win-monitor">System Monitor</div>
+  </div>
   <div class="taskbar">
-    BrainrotOS Pro
-    <div class="clock">00:00</div>
-  </div>
-
-  <!-- App Windows -->
-
-  <!-- Pump.fun -->
-  <div id="win-pump" class="window" style="top: 10vh; left: 15vw;">
-    <div class="titlebar">
-      PUMP.FUN
-      <button class="close">✕</button>
-    </div>
-    <div class="content">
-      <iframe src="https://pump.fun"></iframe>
+    BrainrotOS Ultimate
+    <div class="tray">
+      <img src="https://img.icons8.com/fluency-systems-filled/48/000000/wifi.png"/>
+      <img src="https://img.icons8.com/fluency-systems-filled/48/000000/speaker.png"/>
+      <img src="https://img.icons8.com/fluency-systems-filled/48/000000/battery.png"/>
+      <div class="clock">00:00</div>
     </div>
   </div>
 
-  <!-- Rug Pull Detector -->
-  <div id="win-rug" class="window" style="top: 12vh; left: 18vw;">
-    <div class="titlebar">
-      RUG PULL DETECTOR
-      <button class="close">✕</button>
-    </div>
-    <div class="content terminal" id="rug-output">
-      <p>> scanning liquidity…</p>
-      <p>> RESULT: <strong>SAFE ✅</strong></p>
-      <p><em>Click icon to re-scan</em></p>
-    </div>
-  </div>
+  <!-- WINDOWS -->
 
-  <!-- Meme Coins -->
-  <div id="win-meme" class="window" style="top: 14vh; left: 21vw;">
-    <div class="titlebar">
-      TRENDING MEME COINS
-      <button class="close">✕</button>
-    </div>
+  <!-- Explorer -->
+  <div id="win-explorer" class="window" style="top:10vh; left:15vw;">
+    <div class="titlebar">File Explorer <button class="close">✕</button></div>
     <div class="content">
       <ul>
-        <li>🐶 DOGE – $0.34 (+12%)</li>
-        <li>🦴 SHIB – $0.000032 (+18%)</li>
-        <li>🔺 FLOKI – $0.00015 (+22%)</li>
-        <li>🐸 PUDGY – $0.0021 (+9%)</li>
+        <li>📁 memes/</li>
+        <li>📁 notes/</li>
+        <li>📁 config/</li>
+        <li>📄 readme.txt</li>
       </ul>
     </div>
   </div>
 
-  <!-- Crypto Tweets -->
-  <div id="win-tweets" class="window" style="top: 16vh; left: 24vw;">
-    <div class="titlebar">
-      LIVE CRYPTO TWEETS
-      <button class="close">✕</button>
-    </div>
-    <div class="content">
-      <blockquote>“$SHIB just mooning again 🚀” – @CryptoKaren</blockquote>
-      <blockquote>“watch out for that new rug pull 😬” – @DeFiDetective</blockquote>
-      <blockquote>“pump.fun charts look insane 🔥” – @MoonHunter</blockquote>
+  <!-- Sticky Notes -->
+  <div id="win-notes" class="window" style="top:12vh; left:18vw;">
+    <div class="titlebar">Sticky Notes <button class="close">✕</button></div>
+    <div class="content" id="notes-content">
+      <!-- JS will inject random notes -->
     </div>
   </div>
 
-  <!-- Terminal -->
-  <div id="win-term" class="window" style="top: 18vh; left: 27vw;">
-    <div class="titlebar">
-      TERMINAL
-      <button class="close">✕</button>
+  <!-- Meme Gallery -->
+  <div id="win-gallery" class="window" style="top:14vh; left:21vw;">
+    <div class="titlebar">Meme Gallery <button class="close">✕</button></div>
+    <div class="content" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <img src="https://source.unsplash.com/featured/?meme,fun" />
+      <img src="https://source.unsplash.com/featured/?meme,cat" />
+      <img src="https://source.unsplash.com/featured/?meme,dog" />
+      <img src="https://source.unsplash.com/featured/?meme,crypto" />
     </div>
-    <div class="content terminal">
-      <p>> Welcome to BrainrotOS Pro</p>
-      <p>> Type “help” for commands</p>
+  </div>
+
+  <!-- Settings -->
+  <div id="win-settings" class="window" style="top:16vh; left:24vw;">
+    <div class="titlebar">Settings <button class="close">✕</button></div>
+    <div class="content">
+      <p>🌓 Dark Mode: <strong>Enabled</strong></p>
+      <p>🔊 Volume: <strong>80%</strong></p>
+      <p>🌐 Language: <strong>EN-US</strong></p>
+    </div>
+  </div>
+
+  <!-- System Monitor -->
+  <div id="win-monitor" class="window" style="top:18vh; left:27vw;">
+    <div class="titlebar">System Monitor <button class="close">✕</button></div>
+    <div class="content">
+      <p>CPU Usage</p>
+      <div class="bar"><div class="bar-inner" id="cpu-bar"></div></div>
+      <p>RAM Usage</p>
+      <div class="bar"><div class="bar-inner" id="ram-bar"></div></div>
     </div>
   </div>
 
   <script>
     // clock
-    function updateClock() {
+    const clock = document.querySelector('.clock');
+    setInterval(() => {
       const d = new Date();
-      document.querySelector('.clock').textContent =
-        d.getHours().toString().padStart(2,'0') + ':' +
-        d.getMinutes().toString().padStart(2,'0');
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+      clock.textContent = d.getHours().toString().padStart(2,'0')
+        + ':' + d.getMinutes().toString().padStart(2,'0');
+    },1000);
 
-    // toggle windows
-    document.querySelectorAll('.icon').forEach(ic => {
-      ic.addEventListener('click', () => {
-        const win = document.getElementById(ic.dataset.win);
-        const showing = getComputedStyle(win).display === 'flex';
-        win.style.display = showing ? 'none' : 'flex';
-      });
+    // start menu toggle
+    const startBtn = document.querySelector('.start-button');
+    const startMenu = document.querySelector('.start-menu');
+    startBtn.onclick = () => startMenu.style.display = startMenu.style.display==='flex'? 'none':'flex';
+
+    // notes
+    const notes = [
+      "HODL until moon 🌕",
+      "Did you rug pull me bro? 🤨",
+      "Remember: memecoin > bitcoin",
+      "Brainrot activated! 🤯",
+      "pump.fun to the stars 🚀"
+    ];
+    const notesContent = document.getElementById('notes-content');
+    notes.forEach(n => {
+      const p = document.createElement('p');
+      p.textContent = n;
+      notesContent.appendChild(p);
+    });
+
+    // simulate monitor
+    function randPct(){ return Math.floor(Math.random()*80+10)+'%'; }
+    const cpuBar = document.getElementById('cpu-bar');
+    const ramBar = document.getElementById('ram-bar');
+    setInterval(()=>{
+      cpuBar.style.width = randPct();
+      ramBar.style.width = randPct();
+    },1000);
+
+    // open/close windows
+    document.querySelectorAll('.icon, .start-menu .item').forEach(el=>{
+      const win = document.getElementById(el.dataset.win);
+      el.onclick = ()=>{
+        if (win) win.style.display = (getComputedStyle(win).display==='flex')?'none':'flex';
+        startMenu.style.display = 'none';
+      };
     });
 
     // close buttons
-    document.querySelectorAll('.close').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.closest('.window').style.display = 'none';
-      });
+    document.querySelectorAll('.close').forEach(b=>{
+      b.onclick = ()=>b.closest('.window').style.display='none';
     });
 
-    // draggable
-    document.querySelectorAll('.window').forEach(w => {
+    // draggable windows
+    document.querySelectorAll('.window').forEach(w=>{
       const bar = w.querySelector('.titlebar');
-      bar.addEventListener('mousedown', e => {
+      bar.onmousedown = e=>{
         const rect = w.getBoundingClientRect();
-        const offX = e.clientX - rect.left, offY = e.clientY - rect.top;
-        function move(e) {
-          w.style.left = e.clientX - offX + 'px';
-          w.style.top  = e.clientY - offY + 'px';
+        const offX = e.clientX-rect.left, offY = e.clientY-rect.top;
+        function mv(e){
+          w.style.left = e.clientX-offX+'px';
+          w.style.top  = e.clientY-offY+'px';
         }
-        document.addEventListener('mousemove', move);
-        document.addEventListener('mouseup', () => {
-          document.removeEventListener('mousemove', move);
-        }, { once: true });
-      });
-      bar.ondragstart = () => false;
-    });
-
-    // rug detector logic
-    const rugOut = document.getElementById('rug-output');
-    document.querySelector('[data-win="win-rug"]').addEventListener('click', () => {
-      setTimeout(() => {
-        const safe = Math.random() > 0.3;
-        rugOut.innerHTML = `
-          <p>> scanning liquidity…</p>
-          <p>> RESULT: <strong>${safe? 'SAFE ✅':'RUG PULL 🚨'}</strong></p>
-          <p><em>Click icon to re-scan</em></p>`;
-      }, 300);
+        document.addEventListener('mousemove',mv);
+        document.addEventListener('mouseup',()=>document.removeEventListener('mousemove',mv),{once:true});
+      };
+      bar.ondragstart=()=>false;
     });
   </script>
 </body>
