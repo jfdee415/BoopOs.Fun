@@ -74,6 +74,23 @@
       margin-top: 6px;
       text-shadow: 0 0 4px rgba(0,0,0,0.7);
     }
+    .window {
+      display: none;
+      position: absolute;
+      top: 150px;
+      left: 200px;
+      width: 300px;
+      height: 180px;
+      background: var(--win-bg);
+      border: 2px solid var(--accent);
+      color: var(--text);
+      padding: 8px;
+      font-size: 10px;
+      z-index: 1000;
+    }
+    .window.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -82,14 +99,30 @@
   <h1 class="title">Welcome to GORK OS • Pump & Rug Supreme</h1>
 
   <div class="desktop">
-    <div class="icon"><div class="emoji">🚀</div><label>PUMP</label></div>
-    <div class="icon"><div class="emoji">📉</div><label>RUG</label></div>
-    <div class="icon"><div class="emoji">🦈</div><label>MEMES</label></div>
-    <div class="icon"><div class="emoji">🐦</div><label>TWTS</label></div>
-    <div class="icon"><div class="emoji">🖼️</div><label>NFTS</label></div>
-    <div class="icon"><div class="emoji">💬</div><label>CHAT</label></div>
-    <div class="icon"><div class="emoji">⛽</div><label>GAS</label></div>
-    <div class="icon"><div class="emoji">📈</div><label>TICKER</label></div>
+    <div class="icon" onclick="toggleWindow('win-pump')"><div class="emoji">🚀</div><label>PUMP</label></div>
+    <div class="icon" onclick="toggleWindow('win-rug')"><div class="emoji">📉</div><label>RUG</label></div>
+    <div class="icon" onclick="toggleWindow('win-meme')"><div class="emoji">🦈</div><label>MEMES</label></div>
+    <div class="icon" onclick="toggleWindow('win-tweets')"><div class="emoji">🐦</div><label>TWTS</label></div>
+    <div class="icon" onclick="toggleWindow('win-nfts')"><div class="emoji">🖼️</div><label>NFTS</label></div>
+    <div class="icon" onclick="toggleWindow('win-chat')"><div class="emoji">💬</div><label>CHAT</label></div>
+    <div class="icon" onclick="toggleWindow('win-gas')"><div class="emoji">⛽</div><label>GAS</label></div>
+    <div class="icon" onclick="toggleWindow('win-ticker')"><div class="emoji">📈</div><label>TICKER</label></div>
   </div>
+
+  <div class="window" id="win-pump">🚀 Pump window loaded.</div>
+  <div class="window" id="win-rug">📉 Rug pull incoming!</div>
+  <div class="window" id="win-meme">🦈 Meme board open.</div>
+  <div class="window" id="win-tweets">🐦 Viewing tweets...</div>
+  <div class="window" id="win-nfts">🖼️ NFT drop list.</div>
+  <div class="window" id="win-chat">💬 Chat interface.</div>
+  <div class="window" id="win-gas">⛽ Gas prices surging.</div>
+  <div class="window" id="win-ticker">📈 Real-time ticker data.</div>
+
+  <script>
+    function toggleWindow(id) {
+      const win = document.getElementById(id);
+      win.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
