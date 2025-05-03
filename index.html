@@ -47,6 +47,32 @@
       pointer-events: none;
       z-index: 2;
     }
+    .dove {
+      position: absolute;
+      top: 10%; left: 80%;
+      width: 80px;
+      animation: flap 5s ease-in-out infinite;
+      z-index: 1;
+    }
+    @keyframes flap {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .bless-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: #fffacd;
+      color: #000;
+      font-family: 'Press Start 2P';
+      font-size: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid #fff;
+      cursor: pointer;
+      z-index: 10000;
+      box-shadow: 0 0 12px rgba(255,255,255,0.4);
+    }
     .desktop {
       position: absolute;
       top: 80px; left: 0; right: 0; bottom: 0;
@@ -100,6 +126,7 @@
 <body>
   <div class="halo"></div>
   <div class="incense"></div>
+  <img class="dove" src="https://i.imgur.com/8AGi8aX.png" alt="Dove"/>
   <h1 class="title">His Holiness OS • Pope Trump Supreme Pontiff</h1>
 
   <div class="desktop">
@@ -112,6 +139,8 @@
   <div class="window" id="win-pope2"><img src="./images/pope%202.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
   <div class="window" id="win-pope3"><img src="./images/pope%203.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
 
+  <button class="bless-btn" onclick="blessUser()">🙏 BLESS</button>
+
   <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_30db7fd645.mp3?filename=click-124467.mp3"></audio>
   <audio id="chantMusic" src="https://cdn.pixabay.com/download/audio/2022/03/04/audio_9c0c1dc4c0.mp3?filename=monastery-chant-164179.mp3" autoplay loop></audio>
 
@@ -122,6 +151,10 @@
       sound.currentTime = 0;
       sound.play();
       win.classList.toggle('active');
+    }
+
+    function blessUser() {
+      alert('🙏 You have been blessed by His Holiness. Go forth in meme peace.');
     }
 
     document.querySelectorAll('.window').forEach(win => {
