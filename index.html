@@ -46,11 +46,50 @@
       color: var(--accent);
       z-index: 9999;
     }
+    .desktop {
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .icon {
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .emoji {
+      font-size: 40px;
+      filter: drop-shadow(0 0 8px var(--accent)) saturate(200%);
+      transition: 0.15s;
+    }
+    .icon:hover .emoji {
+      transform: translateY(-4px) scale(1.1);
+      filter: drop-shadow(0 0 20px var(--accent));
+    }
+    .icon label {
+      display: block;
+      font-size: 10px;
+      margin-top: 6px;
+      text-shadow: 0 0 4px rgba(0,0,0,0.7);
+    }
   </style>
 </head>
 <body>
   <img src="assets/gork os.jpg" class="gork-logo-top" alt="GORK OS Logo Top">
   <img src="assets/gork os.jpg" class="gork-logo-bottom" alt="GORK OS Logo Bottom">
   <h1 class="title">Welcome to GORK OS • Pump & Rug Supreme</h1>
+
+  <div class="desktop">
+    <div class="icon"><div class="emoji">🚀</div><label>PUMP</label></div>
+    <div class="icon"><div class="emoji">📉</div><label>RUG</label></div>
+    <div class="icon"><div class="emoji">🦈</div><label>MEMES</label></div>
+    <div class="icon"><div class="emoji">🐦</div><label>TWTS</label></div>
+    <div class="icon"><div class="emoji">🖼️</div><label>NFTS</label></div>
+    <div class="icon"><div class="emoji">💬</div><label>CHAT</label></div>
+    <div class="icon"><div class="emoji">⛽</div><label>GAS</label></div>
+    <div class="icon"><div class="emoji">📈</div><label>TICKER</label></div>
+  </div>
 </body>
 </html>
