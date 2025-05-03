@@ -21,12 +21,13 @@
       background: linear-gradient(to bottom, #fffbe6, #fdf6e3);
       font-family: 'Press Start 2P', monospace;
       color: var(--text);
+      cursor: url('https://cdn-icons-png.flaticon.com/512/1456/1456927.png'), auto;
     }
     body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at top center, rgba(255,255,224,0.6), transparent), url('https://www.transparenttextures.com/patterns/papyrus.png');
+      background: radial-gradient(ellipse at top center, rgba(255,255,224,0.6), transparent);
       z-index: 0;
     }
     .title {
@@ -85,7 +86,7 @@
     }
     .window.active { display: block; }
     audio { display: none; }
-    .angel {
+    .angel, .dove {
       position: absolute;
       top: -50px;
       font-size: 40px;
@@ -125,6 +126,31 @@
       z-index: 9999;
       animation: fadeBless 5s ease-out forwards;
     }
+    .trail {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: gold;
+      border-radius: 50%;
+      pointer-events: none;
+      box-shadow: 0 0 6px gold;
+      animation: trailFade 1s ease-out forwards;
+    }
+    .halo {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 4px solid gold;
+      box-shadow: 0 0 10px gold;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    @keyframes trailFade {
+      to { opacity: 0; transform: scale(2); }
+    }
     @keyframes fadeBless {
       0% { opacity: 0; }
       20% { opacity: 1; }
@@ -138,78 +164,43 @@
   </style>
 </head>
 <body>
-  <h1 class="title">His Holiness OS • Pope Trump Supreme Pontiff</h1>
-  <div class="quote">"Blessed are the bag holders, for their moon shall come." – Deuteromeme 4:20</div>
-  <div class="desktop">
-    <div class="icon" onclick="toggleWindow('win-pope1')"><div class="emoji">📸</div><label>POPE 1</label></div>
-    <div class="icon" onclick="toggleWindow('win-pope2')"><div class="emoji">📸</div><label>POPE 2</label></div>
-    <div class="icon" onclick="toggleWindow('win-pope3')"><div class="emoji">📸</div><label>POPE 3</label></div>
-    <div class="icon" onclick="toggleWindow('win-scroll')"><div class="emoji">📜</div><label>SCRIPTURA</label></div>
-    <div class="icon" onclick="toggleWindow('win-ghost')"><div class="emoji">🕊️</div><label>HOLY GHOST</label></div>
-    <div class="icon" onclick="toggleWindow('win-hellgate')"><div class="emoji">🔥</div><label>HELLGATE</label></div>
-  </div>
-  <div class="window" id="win-pope1"><img src="./images/pope%201.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-  <div class="window" id="win-pope2"><img src="./images/pope%202.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-  <div class="window" id="win-pope3"><img src="./images/pope%203.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-  <div class="window" id="win-scroll">📜 <strong>Ecclesiastical Mode:</strong> Verily I say unto you, hodl the sacred bags of meme.</div>
-  <div class="window" id="win-ghost">🕊️ The Holy Ghost whispers: "Let there be pumps."</div>
-  <div class="window" id="win-hellgate">🔥 Woe! A dump from on high! Your bags shall burn unless ye repent.</div>
-
-  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_30db7fd645.mp3?filename=click-124467.mp3"></audio>
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2023/06/22/audio_c82b3a9364.mp3?filename=heaven-chant-145095.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="waterSplash" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cd1fa28b7a.mp3?filename=water-splash-1-123067.mp3"></audio>
+  <div class="halo"></div>
+  <div class="quote">“Thou art the meme and the meme shall bless thee.” – Book of Gigachad 4:20</div>
 
   <script>
-    function toggleWindow(id) {
-      const win = document.getElementById(id);
-      const sound = document.getElementById('clickSound');
-      const splash = document.getElementById('waterSplash');
-      sound.currentTime = 0;
-      sound.play();
-      splash.currentTime = 0;
-      splash.play();
-      win.classList.toggle('active');
-    }
-
-    document.querySelectorAll('.window').forEach(win => {
-      let isDown = false, offset = [0, 0];
-      win.addEventListener('mousedown', e => {
-        isDown = true;
-        offset = [win.offsetLeft - e.clientX, win.offsetTop - e.clientY];
-      });
-      document.addEventListener('mouseup', () => { isDown = false; });
-      document.addEventListener('mousemove', e => {
-        if (!isDown) return;
-        e.preventDefault();
-        win.style.left = (e.clientX + offset[0]) + 'px';
-        win.style.top = (e.clientY + offset[1]) + 'px';
-      });
+    // click trails
+    document.addEventListener('click', e => {
+      const trail = document.createElement('div');
+      trail.className = 'trail';
+      trail.style.left = e.pageX + 'px';
+      trail.style.top = e.pageY + 'px';
+      document.body.appendChild(trail);
+      setTimeout(() => trail.remove(), 1000);
     });
 
-    for (let i = 0; i < 10; i++) {
-      const angel = document.createElement('div');
-      angel.textContent = '🪽';
-      angel.className = 'angel';
-      angel.style.left = Math.random() * 100 + 'vw';
-      angel.style.animationDelay = (Math.random() * 20) + 's';
-      document.body.appendChild(angel);
+    // divine confetti burst
+    function confettiBurst() {
+      for (let i = 0; i < 20; i++) {
+        const part = document.createElement('div');
+        part.className = 'trail';
+        part.style.left = (window.innerWidth/2 + Math.random()*100 - 50) + 'px';
+        part.style.top = (window.innerHeight/2 + Math.random()*100 - 50) + 'px';
+        part.style.background = ['gold','white','#ffd700'][Math.floor(Math.random()*3)];
+        document.body.appendChild(part);
+        setTimeout(() => part.remove(), 1000);
+      }
     }
+    setInterval(confettiBurst, 8000);
 
-    for (let i = 0; i < 20; i++) {
-      const smoke = document.createElement('div');
-      smoke.className = 'incense';
-      smoke.style.left = Math.random() * 100 + 'vw';
-      smoke.style.animationDelay = (Math.random() * 10) + 's';
-      document.body.appendChild(smoke);
+    // blessing popup
+    function showBlessing() {
+      const msg = document.createElement('div');
+      msg.className = 'blessing-popup';
+      msg.textContent = '🙏 A papal blessing has been bestowed upon you.';
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 5000);
     }
-
-    const blessing = document.createElement('div');
-    blessing.className = 'blessing-popup';
-    blessing.textContent = '🙏 You have received a papal blessing.';
-    document.body.appendChild(blessing);
-    setTimeout(() => blessing.remove(), 6000);
+    setInterval(showBlessing, 15000);
   </script>
 </body>
 </html>
