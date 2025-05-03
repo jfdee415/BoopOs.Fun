@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>GORK OS • Pump & Rug Supreme</title>
+  <title>POPE OS • His Holiness Deluxe</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --bg: #0a0a12;
-      --accent: #fef08a;
-      --text: #fff;
+      --accent: #fffacd;
+      --text: #ffffff;
       --text-dark: #111;
       --win-bg: rgba(0,0,16,.95);
       --bar-bg: rgba(0,0,0,.7);
@@ -18,31 +18,18 @@
     *{box-sizing:border-box;margin:0;padding:0;}
     html,body {
       width:100%;height:100%;overflow:hidden;
-      background: var(--bg);
+      background: var(--bg) url("./images/pope%201.jpg") center center / cover no-repeat;
       font-family:'Press Start 2P',monospace;color:var(--text);
-    }
-    .gork-logo-top {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 120px;
-      height: auto;
-      z-index: 9999;
-    }
-    .gork-logo-bottom {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      width: 80px;
-      height: auto;
-      z-index: 9999;
     }
     .title {
       position: absolute;
       top: 20px;
-      left: 140px;
+      left: 20px;
       font-size: 10px;
       color: var(--accent);
+      background: rgba(0,0,0,0.5);
+      padding: 4px 8px;
+      border-radius: 4px;
       z-index: 9999;
     }
     .desktop {
@@ -55,8 +42,6 @@
       flex-direction: column;
       gap: 24px;
       padding-left: 20px;
-      background: url('./images/gork%20os.jpg') center center / contain no-repeat, var(--bg);
-      background-blend-mode: lighten;
       z-index: 1;
     }
     .icon {
@@ -105,29 +90,17 @@
   </style>
 </head>
 <body>
-  <img src="./images/gork%20os.jpg" class="gork-logo-top" alt="GORK OS Logo Top">
-  <img src="./images/gork%20os.jpg" class="gork-logo-bottom" alt="GORK OS Logo Bottom">
-  <h1 class="title">Welcome to GORK OS • Pump & Rug Supreme</h1>
+  <h1 class="title">His Holiness OS • Blessed with Pope Trump</h1>
 
   <div class="desktop">
-    <div class="icon" onclick="toggleWindow('win-pump')"><div class="emoji">🚀</div><label>PUMP</label></div>
-    <div class="icon" onclick="toggleWindow('win-rug')"><div class="emoji">📉</div><label>RUG</label></div>
-    <div class="icon" onclick="toggleWindow('win-meme')"><div class="emoji">🦈</div><label>MEMES</label></div>
-    <div class="icon" onclick="toggleWindow('win-tweets')"><div class="emoji">🐦</div><label>TWTS</label></div>
-    <div class="icon" onclick="toggleWindow('win-nfts')"><div class="emoji">🖼️</div><label>NFTS</label></div>
-    <div class="icon" onclick="toggleWindow('win-chat')"><div class="emoji">💬</div><label>CHAT</label></div>
-    <div class="icon" onclick="toggleWindow('win-gas')"><div class="emoji">⛽</div><label>GAS</label></div>
-    <div class="icon" onclick="toggleWindow('win-ticker')"><div class="emoji">📈</div><label>TICKER</label></div>
+    <div class="icon" onclick="toggleWindow('win-pope1')"><div class="emoji">📸</div><label>POPE 1</label></div>
+    <div class="icon" onclick="toggleWindow('win-pope2')"><div class="emoji">📸</div><label>POPE 2</label></div>
+    <div class="icon" onclick="toggleWindow('win-pope3')"><div class="emoji">📸</div><label>POPE 3</label></div>
   </div>
 
-  <div class="window" id="win-pump">🚀 Pump window loaded.</div>
-  <div class="window" id="win-rug">📉 Rug pull incoming!</div>
-  <div class="window" id="win-meme">🦈 Meme board open.</div>
-  <div class="window" id="win-tweets">🐦 Viewing tweets...</div>
-  <div class="window" id="win-nfts">🖼️ NFT drop list.</div>
-  <div class="window" id="win-chat">💬 Chat interface.</div>
-  <div class="window" id="win-gas">⛽ Gas prices surging.</div>
-  <div class="window" id="win-ticker">📈 Real-time ticker data.</div>
+  <div class="window" id="win-pope1"><img src="./images/pope%201.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
+  <div class="window" id="win-pope2"><img src="./images/pope%202.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
+  <div class="window" id="win-pope3"><img src="./images/pope%203.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
 
   <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_30db7fd645.mp3?filename=click-124467.mp3"></audio>
 
