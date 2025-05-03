@@ -18,10 +18,7 @@
     *{box-sizing:border-box;margin:0;padding:0;}
     html,body {
       width:100%;height:100%;overflow:hidden;
-      background: var(--bg) url('./assets/gork%20hands.jpg') bottom right no-repeat;
-      background-size: 300px;
-      background-repeat: no-repeat;
-      background-position: bottom right;
+      background: var(--bg);
       font-family:'Press Start 2P',monospace;color:var(--text);
     }
     .gork-logo-top {
@@ -55,6 +52,11 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      width: 100%;
+      height: 100%;
+      background: url('./assets/gork%20hands.jpg') center center no-repeat;
+      background-size: cover;
+      z-index: 1;
     }
     .icon {
       text-align: center;
