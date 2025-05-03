@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #fefefe;
-      --accent: #fffacd;
+      --bg: #fdf6e3;
+      --accent: #ffd700;
       --text: #111;
       --text-dark: #111;
       --win-bg: rgba(255,255,255,0.95);
@@ -18,9 +18,16 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 100%; height: 100%; overflow: hidden;
-      background: var(--bg);
+      background: linear-gradient(to bottom, #fffbe6, #fdf6e3);
       font-family: 'Press Start 2P', monospace;
       color: var(--text);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at top center, rgba(255,255,224,0.6), transparent), url('https://www.transparenttextures.com/patterns/papyrus.png');
+      z-index: 0;
     }
     .title {
       position: absolute;
@@ -78,6 +85,26 @@
     }
     .window.active { display: block; }
     audio { display: none; }
+    .angel {
+      position: absolute;
+      top: -50px;
+      font-size: 40px;
+      animation: floatDown 20s linear infinite;
+      color: #fff;
+      text-shadow: 0 0 6px gold;
+    }
+    .incense {
+      position: absolute;
+      width: 20px; height: 20px;
+      background: radial-gradient(circle, white 20%, transparent 70%);
+      animation: incenseRise 6s linear infinite;
+      opacity: 0.5;
+    }
+    @keyframes floatDown { to { top: 100%; } }
+    @keyframes incenseRise {
+      0% { bottom: 0; opacity: 0.2; transform: translateX(0); }
+      100% { bottom: 100%; opacity: 0; transform: translateX(-40px); }
+    }
   </style>
 </head>
 <body>
@@ -100,13 +127,20 @@
   <div class="window" id="win-hellgate">🔥 Woe! A dump from on high! Your bags shall burn unless ye repent.</div>
 
   <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_30db7fd645.mp3?filename=click-124467.mp3"></audio>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/06/22/audio_c82b3a9364.mp3?filename=heaven-chant-145095.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="waterSplash" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_cd1fa28b7a.mp3?filename=water-splash-1-123067.mp3"></audio>
 
   <script>
     function toggleWindow(id) {
       const win = document.getElementById(id);
       const sound = document.getElementById('clickSound');
+      const splash = document.getElementById('waterSplash');
       sound.currentTime = 0;
       sound.play();
+      splash.currentTime = 0;
+      splash.play();
       win.classList.toggle('active');
     }
 
@@ -127,6 +161,25 @@
         win.style.top = (e.clientY + offset[1]) + 'px';
       });
     });
+
+    // Floating angels
+    for (let i = 0; i < 10; i++) {
+      const angel = document.createElement('div');
+      angel.textContent = '🪽';
+      angel.className = 'angel';
+      angel.style.left = Math.random() * 100 + 'vw';
+      angel.style.animationDelay = (Math.random() * 20) + 's';
+      document.body.appendChild(angel);
+    }
+
+    // Incense smoke
+    for (let i = 0; i < 20; i++) {
+      const smoke = document.createElement('div');
+      smoke.className = 'incense';
+      smoke.style.left = Math.random() * 100 + 'vw';
+      smoke.style.animationDelay = (Math.random() * 10) + 's';
+      document.body.appendChild(smoke);
+    }
   </script>
 </body>
 </html>
