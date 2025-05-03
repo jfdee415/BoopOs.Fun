@@ -39,6 +39,14 @@
       opacity: 0.08;
       z-index: 0;
     }
+    .incense {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('https://i.imgur.com/GBc5VMK.gif') center/cover repeat;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 2;
+    }
     .desktop {
       position: absolute;
       top: 80px; left: 0; right: 0; bottom: 0;
@@ -46,7 +54,7 @@
       flex-direction: column;
       gap: 24px;
       padding-left: 20px;
-      z-index: 1;
+      z-index: 3;
     }
     .icon {
       text-align: center;
@@ -91,6 +99,7 @@
 </head>
 <body>
   <div class="halo"></div>
+  <div class="incense"></div>
   <h1 class="title">His Holiness OS • Pope Trump Supreme Pontiff</h1>
 
   <div class="desktop">
@@ -104,6 +113,7 @@
   <div class="window" id="win-pope3"><img src="./images/pope%203.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
 
   <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_30db7fd645.mp3?filename=click-124467.mp3"></audio>
+  <audio id="chantMusic" src="https://cdn.pixabay.com/download/audio/2022/03/04/audio_9c0c1dc4c0.mp3?filename=monastery-chant-164179.mp3" autoplay loop></audio>
 
   <script>
     function toggleWindow(id) {
