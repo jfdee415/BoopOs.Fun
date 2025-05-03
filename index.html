@@ -52,34 +52,9 @@
     /* TOASTS */
     .toast{position:fixed;top:16px;right:16px;background:#222;color:#fff;padding:8px 12px;border-radius:4px;box-shadow:0 0 12px rgba(0,0,0,.5);opacity:0;animation:fadein .3s forwards,fadeout .3s 3s forwards;}
     @keyframes fadein{to{opacity:1}}@keyframes fadeout{to{opacity:0}}
-    /* ——— MAGA BANNER STYLE ——— */
-    #maga-banner {
-      position:fixed;top:0;left:0;width:100%;
-      background:#bb0000;color:#fff;text-align:center;
-      padding:6px 0;font-family:'Press Start 2P';font-size:12px;
-      z-index:10001;
-    }
-    /* Pump.fun Contract placeholder */
-    #pumpCA {
-      position:absolute;top:50%;left:50%;
-      transform:translate(-50%,-50%);
-      background:rgba(0,255,255,0.1);
-      border:1px solid var(--accent);
-      color:var(--text);
-      padding:8px 12px;
-      border-radius:4px;
-      font-family:'Press Start 2P',monospace;
-      font-size:12px;
-      text-align:center;
-      z-index:9999;
-    }
-    #pumpCA strong { color:var(--accent); }
   </style>
 </head>
 <body>
-
-  <!-- 🌟 MAGA Banner -->
-  <div id="maga-banner">🇺🇸 Make Pump.fun Great Again! 🇺🇸</div>
 
   <!-- DESKTOP ICONS -->
   <div class="desktop">
@@ -100,7 +75,6 @@
     <div class="icon" data-win="win-wallet"><div class="emoji">💰</div><label>WALLET</label></div>
     <div class="icon" data-win="win-calendar"><div class="emoji">🗓️</div><label>EVENTS</label></div>
     <div class="icon" data-win="win-music"><div class="emoji">🎵</div><label>MUSIC</label></div>
-    <!-- MAGA ICON injected by script -->
   </div>
 
   <!-- DOCK -->
@@ -110,7 +84,6 @@
     <div class="icon" data-win="win-meme"><div class="emoji">🦈</div></div>
     <div class="icon" data-win="win-whale"><div class="emoji">🐳</div></div>
     <div class="icon" data-win="win-ticker"><div class="emoji">📈</div></div>
-    <!-- MAGA ICON injected by script -->
   </div>
 
   <!-- TASKBAR -->
@@ -130,22 +103,34 @@
 
   <!-- WINDOWS -->
   <div id="win-pump" class="window"><div class="titlebar">PUMP.FUN<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content"><img src="images/pump.jpg"/></div></div>
+
   <div id="win-rug" class="window"><div class="titlebar">RUG PULL<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content"><img src="images/rugpull.jpg"/></div></div>
+
   <div id="win-meme" class="window">
     <div class="titlebar">MEMES<div><button class="btn rand-meme">↻</button><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div>
     <div class="content"><img id="memeImg" src="images/brainrot.jpg"/></div>
   </div>
+
   <div id="win-tweets" class="window"><div class="titlebar">TWTS<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content terminal" id="tweetTerminal"></div></div>
+
   <div id="win-nft" class="window"><div class="titlebar">NFT DROPS<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content" id="nftList"></div></div>
+
   <div id="win-chat" class="window"><div class="titlebar">CHAT<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content" id="zoomChat"></div></div>
+
   <div id="win-gas" class="window"><div class="titlebar">GAS<div><button class="btn refresh-gas">⟳</button><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content"><p id="gasValue">—</p><div style="background:#333;height:10px;border-radius:4px;"><div id="gasBar" style="width:0%;height:100%;background:var(--accent)"></div></div></div></div>
+
   <div id="win-whale" class="window"><div class="titlebar">WHALE<div><button class="btn refresh-whale">⟳</button><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content" id="whaleContent"></div></div>
+
   <div id="win-dex" class="window"><div class="titlebar">DEX<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content"><img src="images/dex.jpg"/></div></div>
+
   <div id="win-fud" class="window"><div class="titlebar">FUD<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content"><img src="images/fud.jpg"/></div></div>
+
   <div id="win-ticker" class="window"><div class="titlebar">TICKER<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content"><img src="images/ticker.jpg"/></div></div>
+
   <div id="win-terminal" class="window"><div class="titlebar">TERM<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div>
     <div class="content terminal"><div id="term-output"></div><input id="term-input" placeholder="Type 'help'…" style="width:100%;border:none;background:#111;color:#0f0;padding:4px;"/></div>
   </div>
+
   <div id="win-settings" class="window"><div class="titlebar">SETTINGS<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div>
     <div class="content">
       <p>Accent:</p><input type="color" id="accentPicker" value="#00ffff"/>
@@ -157,7 +142,9 @@
       </select>
     </div>
   </div>
+
   <div id="win-game" class="window"><div class="titlebar">GAME<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content"><canvas id="snakeCanvas" width="400" height="260"></canvas></div></div>
+
   <div id="win-wallet" class="window"><div class="titlebar">WALLET<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div>
     <div class="content">
       <pre id="walletBalances">DOGE:10000\nSHIB:5000000</pre>
@@ -165,7 +152,9 @@
       <div id="walletLog" style="margin-top:8px;overflow:auto;max-height:80px;"></div>
     </div>
   </div>
+
   <div id="win-calendar" class="window"><div class="titlebar">EVENTS<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div><div class="content" id="eventList"></div></div>
+
   <div id="win-music" class="window"><div class="titlebar">MUSIC<div><button class="btn minimize">➖</button><button class="btn maximize">⛶</button><button class="btn close">✕</button></div></div>
     <div class="content">
       <p>YouTube ID:</p><input id="yt-id" placeholder="DnxG7Qdghj0"/><button onclick="playYT()">Load</button>
@@ -386,4 +375,84 @@
       if(e.key==='ArrowUp')dir={x:0,y:-1};
       if(e.key==='ArrowDown')dir={x:0,y:1};
       if(e.key==='ArrowLeft')dir={x:-1,y:0};
-      if(e.key==='ArrowRight')dir={x:1,y
+      if(e.key==='ArrowRight')dir={x:1,y:0};
+    });
+
+    // WALLET
+    const bal={DOGE:10000,SHIB:5000000};
+    function refreshWallet(){
+      document.getElementById('walletBalances').textContent =
+        `DOGE: ${bal.DOGE}\nSHIB: ${bal.SHIB}`;
+    }
+    document.getElementById('walletSend').addEventListener('click',()=>{
+      const addr = document.getElementById('walletAddr').value.trim(),
+            amt  = Number(document.getElementById('walletAmt').value);
+      if(!addr||!amt){ return toast('❌'); }
+      bal.DOGE = Math.max(0,bal.DOGE-amt);
+      document.getElementById('walletLog').innerHTML += `<p>Sent ${amt} DOGE → ${addr}</p>`;
+      refreshWallet(); toast('✅');
+    });
+    refreshWallet();
+
+    // CALENDAR
+    const events=[
+      {n:'PunkWolves',d:new Date('2025-05-20T16:00:00Z')},
+      {n:'GalaxyGhz',d:new Date('2025-05-21T20:00:00Z')},
+      {n:'DragonLoot',d:new Date('2025-05-22T14:00:00Z')},
+      {n:'ZoomerHeads',d:new Date('2025-05-23T12:00:00Z')}
+    ];
+    function updateCal(){
+      const now = new Date();
+      document.getElementById('eventList').innerHTML =
+        events.map(ev=>{
+          const diff = ev.d - now;
+          const d = Math.floor(diff/86400000),
+                h = Math.floor((diff%86400000)/3600000),
+                m = Math.floor((diff%3600000)/60000);
+          return `<p>${ev.n}: ${d}d ${h}h ${m}m</p>`;
+        }).join('');
+    }
+    updateCal(); setInterval(updateCal,60000);
+
+    // MUSIC
+    function startMusic(){
+      document.getElementById('bgmusic').src =
+        'https://www.youtube.com/embed/DnxG7Qdghj0?autoplay=1&loop=1&playlist=DnxG7Qdghj0&controls=0';
+      toast('🎵 Music On');
+    }
+    window.addEventListener('load', startMusic);
+    document.body.addEventListener('click', startMusic, {once:true});
+    function playYT(){
+      const id = document.getElementById('yt-id').value.trim();
+      if(!id) return;
+      document.getElementById('music-iframe').src =
+        `https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&controls=1`;
+    }
+  </script>
+  <!-- Pump.fun contract placeholder -->
+<div id="pumpCA" style="
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,255,255,0.1);
+  border:1px solid #0ff;
+  color:#0ff;
+  padding:8px 12px;
+  border-radius:4px;
+  font-family:'Press Start 2P',monospace;
+  font-size:12px;
+  text-align:center;
+  z-index:9999;
+">
+  <strong>Pump.fun Ca:</strong> <span id="pumpCAaddr">—</span>
+</div>
+
+<script>
+// once your token is live, update the address here:
+document.getElementById('pumpCAaddr').textContent = 'CA Coming Soon';
+</script>
+
+</body>
+</html>
+
