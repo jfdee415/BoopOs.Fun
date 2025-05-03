@@ -48,13 +48,14 @@
     .desktop {
       position: absolute;
       top: 80px;
-      left: 20px;
+      left: 0;
+      right: 0;
+      bottom: 0;
       display: flex;
       flex-direction: column;
       gap: 24px;
-      width: 100%;
-      height: 100%;
-      background: url('./assets/gork%20hands.jpg') center center no-repeat;
+      padding-left: 20px;
+      background: url('./images/gork%20os.jpg') center center no-repeat;
       background-size: cover;
       z-index: 1;
     }
@@ -92,6 +93,7 @@
       font-size: 10px;
       z-index: 1000;
       cursor: move;
+      border-radius: 12px;
     }
     .window.active {
       display: block;
@@ -102,8 +104,8 @@
   </style>
 </head>
 <body>
-  <img src="./assets/gork%20os.jpg" class="gork-logo-top" alt="GORK OS Logo Top">
-  <img src="./assets/gork%20os.jpg" class="gork-logo-bottom" alt="GORK OS Logo Bottom">
+  <img src="./images/gork%20os.jpg" class="gork-logo-top" alt="GORK OS Logo Top">
+  <img src="./images/gork%20os.jpg" class="gork-logo-bottom" alt="GORK OS Logo Bottom">
   <h1 class="title">Welcome to GORK OS • Pump & Rug Supreme</h1>
 
   <div class="desktop">
