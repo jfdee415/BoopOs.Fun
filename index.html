@@ -21,6 +21,7 @@
       background: var(--bg) url("https://upload.wikimedia.org/wikipedia/commons/f/f4/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg") center center / cover no-repeat;
       font-family: 'Press Start 2P', monospace;
       color: var(--text);
+      cursor: url('https://i.imgur.com/wH3K8ZI.png'), auto; /* rosary cursor */
     }
     .title {
       position: absolute;
@@ -32,31 +33,54 @@
       border-radius: 4px;
       z-index: 9999;
     }
-    .halo {
+    .halo, .incense, .dove, .angel, .saint {
       position: absolute;
+      pointer-events: none;
+    }
+    .halo {
       top: 0; left: 0; right: 0; bottom: 0;
       background: url('https://i.imgur.com/2eWDaXJ.png') center/cover no-repeat;
       opacity: 0.08;
       z-index: 0;
     }
     .incense {
-      position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: url('https://i.imgur.com/GBc5VMK.gif') center/cover repeat;
       opacity: 0.06;
-      pointer-events: none;
       z-index: 2;
     }
     .dove {
-      position: absolute;
       top: 10%; left: 80%;
       width: 80px;
       animation: flap 5s ease-in-out infinite;
       z-index: 1;
     }
+    .angel {
+      width: 60px;
+      top: 0; left: -100px;
+      animation: floatAcross 20s linear infinite;
+      z-index: 2;
+    }
+    .saint {
+      bottom: 10px; left: 20px;
+      width: 60px;
+      opacity: 0.85;
+      animation: pulse 6s infinite;
+      z-index: 2;
+    }
     @keyframes flap {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
+    }
+    @keyframes floatAcross {
+      0% { left: -100px; top: 20%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { left: 110%; top: 25%; opacity: 0; }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.05); opacity: 1; }
     }
     .bless-btn {
       position: absolute;
@@ -129,6 +153,8 @@
   <div class="halo"></div>
   <div class="incense"></div>
   <img class="dove" src="https://i.imgur.com/8AGi8aX.png" alt="Dove"/>
+  <img class="angel" src="https://i.imgur.com/kMwhgHz.png" alt="Angel"/>
+  <img class="saint" src="https://i.imgur.com/GjJv7pO.png" alt="Saint Trump"/>
   <h1 class="title">His Holiness OS • Pope Trump Supreme Pontiff</h1>
 
   <div class="desktop">
@@ -143,9 +169,9 @@
   <div class="window" id="win-pope1"><img src="./images/pope%201.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
   <div class="window" id="win-pope2"><img src="./images/pope%202.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
   <div class="window" id="win-pope3"><img src="./images/pope%203.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-  <div class="window" id="win-scroll">Lorem Ipsum Dominus • Blessed Ipsum Dolor Sit Amen.</div>
-  <div class="window" id="win-ghost">🕊️ The Holy Ghost says: "Buy the dip, my child."</div>
-  <div class="window" id="win-hellgate">🔥 You have summoned FUD. Repent.</div>
+  <div class="window" id="win-scroll">📜 <strong>Ecclesiastical Mode:</strong> Verily I say unto you, hodl the sacred bags of meme.</div>
+  <div class="window" id="win-ghost">🕊️ The Holy Ghost whispers: "Let there be pumps."</div>
+  <div class="window" id="win-hellgate">🔥 Woe! A dump from on high! Your bags shall burn unless ye repent.</div>
 
   <button class="bless-btn" onclick="blessUser()">🙏 BLESS</button>
 
@@ -168,25 +194,4 @@
     document.querySelectorAll('.window').forEach(win => {
       let isDown = false, offset = [0, 0];
 
-      win.addEventListener('mousedown', e => {
-        isDown = true;
-        offset = [
-          win.offsetLeft - e.clientX,
-          win.offsetTop - e.clientY
-        ];
-      });
-
-      document.addEventListener('mouseup', () => {
-        isDown = false;
-      });
-
-      document.addEventListener('mousemove', e => {
-        if (!isDown) return;
-        e.preventDefault();
-        win.style.left = (e.clientX + offset[0]) + 'px';
-        win.style.top = (e.clientY + offset[1]) + 'px';
-      });
-    });
-  </script>
-</body>
-</html>
+      win.addEventListener('mousedo
