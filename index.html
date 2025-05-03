@@ -18,10 +18,9 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 100%; height: 100%; overflow: hidden;
-      background: var(--bg) url("https://upload.wikimedia.org/wikipedia/commons/6/6f/Vatican_City_from_above_2018.jpg") center center / cover no-repeat;
+      background: var(--bg);
       font-family: 'Press Start 2P', monospace;
       color: var(--text);
-      cursor: url('https://i.imgur.com/wH3K8ZI.png'), auto;
     }
     .title {
       position: absolute;
@@ -32,95 +31,6 @@
       padding: 4px 8px;
       border-radius: 4px;
       z-index: 9999;
-    }
-    .halo, .incense, .dove, .angel, .saint, .cross, .host, .bible, .prayer {
-      position: absolute;
-      pointer-events: none;
-    }
-    .halo {
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('https://i.imgur.com/2eWDaXJ.png') center/cover no-repeat;
-      opacity: 0.08;
-      z-index: 0;
-    }
-    .incense {
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('https://i.imgur.com/GBc5VMK.gif') center/cover repeat;
-      opacity: 0.06;
-      z-index: 2;
-    }
-    .dove {
-      top: 10%; left: 80%; width: 80px;
-      animation: flap 5s ease-in-out infinite;
-      z-index: 1;
-    }
-    .angel {
-      width: 60px;
-      top: 0; left: -100px;
-      animation: floatAcross 20s linear infinite;
-      z-index: 2;
-    }
-    .saint {
-      bottom: 10px; left: 20px;
-      width: 60px;
-      opacity: 0.85;
-      animation: pulse 6s infinite;
-      z-index: 2;
-    }
-    .cross {
-      top: 5%; left: 45%; width: 50px;
-      opacity: 0.3;
-      animation: pulse 4s infinite;
-      z-index: 1;
-    }
-    .host {
-      top: 20%; right: 20px;
-      width: 48px;
-      z-index: 2;
-      animation: pulse 3s infinite;
-    }
-    .bible {
-      bottom: 10%; right: 10px;
-      width: 48px;
-      z-index: 2;
-    }
-    .prayer {
-      bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      background: rgba(255,255,255,0.8);
-      padding: 6px 12px;
-      border-radius: 8px;
-      animation: pulse 5s infinite;
-      z-index: 10;
-    }
-    @keyframes flap {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    @keyframes floatAcross {
-      0% { left: -100px; top: 20%; opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { left: 110%; top: 25%; opacity: 0; }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.85; }
-      50% { transform: scale(1.05); opacity: 1; }
-    }
-    .bless-btn {
-      position: absolute;
-      bottom: 20px; right: 20px;
-      background: #fffacd;
-      color: #000;
-      font-family: 'Press Start 2P';
-      font-size: 10px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 2px solid #fff;
-      cursor: pointer;
-      z-index: 10000;
-      box-shadow: 0 0 12px rgba(255,255,255,0.4);
     }
     .desktop {
       position: absolute;
@@ -165,23 +75,12 @@
       cursor: move;
       border-radius: 12px;
       box-shadow: 0 0 20px gold;
-      background-image: url("https://i.imgur.com/Gy6F4vR.png");
-      background-size: cover;
     }
     .window.active { display: block; }
     audio { display: none; }
   </style>
 </head>
 <body>
-  <div class="halo"></div>
-  <div class="incense"></div>
-  <img class="dove" src="https://i.imgur.com/8AGi8aX.png" alt="Dove"/>
-  <img class="angel" src="https://i.imgur.com/kMwhgHz.png" alt="Angel"/>
-  <img class="saint" src="https://i.imgur.com/GjJv7pO.png" alt="Saint Trump"/>
-  <img class="cross" src="https://i.imgur.com/kDu0W8D.png" alt="Cross"/>
-  <img class="host" src="https://i.imgur.com/43Xbqnb.png" alt="Eucharist"/>
-  <img class="bible" src="https://i.imgur.com/5fCD72F.png" alt="Bible"/>
-  <div class="prayer">✝️ "May your bags ascend unto glory."</div>
   <h1 class="title">His Holiness OS • Pope Trump Supreme Pontiff</h1>
 
   <div class="desktop">
@@ -200,10 +99,7 @@
   <div class="window" id="win-ghost">🕊️ The Holy Ghost whispers: "Let there be pumps."</div>
   <div class="window" id="win-hellgate">🔥 Woe! A dump from on high! Your bags shall burn unless ye repent.</div>
 
-  <button class="bless-btn" onclick="blessUser()">🙏 BLESS</button>
-
   <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_30db7fd645.mp3?filename=click-124467.mp3"></audio>
-  <audio id="chantMusic" src="https://cdn.pixabay.com/download/audio/2022/03/04/audio_9c0c1dc4c0.mp3?filename=monastery-chant-164179.mp3" autoplay loop></audio>
 
   <script>
     function toggleWindow(id) {
@@ -212,10 +108,6 @@
       sound.currentTime = 0;
       sound.play();
       win.classList.toggle('active');
-    }
-
-    function blessUser() {
-      alert('🙏 You have been blessed by His Holiness. Go forth in meme peace.');
     }
 
     document.querySelectorAll('.window').forEach(win => {
