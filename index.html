@@ -87,9 +87,13 @@
       padding: 8px;
       font-size: 10px;
       z-index: 1000;
+      cursor: move;
     }
     .window.active {
       display: block;
+    }
+    audio {
+      display: none;
     }
   </style>
 </head>
@@ -118,11 +122,40 @@
   <div class="window" id="win-gas">⛽ Gas prices surging.</div>
   <div class="window" id="win-ticker">📈 Real-time ticker data.</div>
 
+  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_30db7fd645.mp3?filename=click-124467.mp3"></audio>
+
   <script>
     function toggleWindow(id) {
       const win = document.getElementById(id);
+      const sound = document.getElementById('clickSound');
+      sound.currentTime = 0;
+      sound.play();
       win.classList.toggle('active');
     }
+
+    // Make windows draggable
+    document.querySelectorAll('.window').forEach(win => {
+      let isDown = false, offset = [0, 0];
+
+      win.addEventListener('mousedown', e => {
+        isDown = true;
+        offset = [
+          win.offsetLeft - e.clientX,
+          win.offsetTop - e.clientY
+        ];
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDown = false;
+      });
+
+      document.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        win.style.left = (e.clientX + offset[0]) + 'px';
+        win.style.top = (e.clientY + offset[1]) + 'px';
+      });
+    });
   </script>
 </body>
 </html>
